@@ -1,4 +1,11 @@
 # cub3D
+## Mandatory Part
+
+## Bonus Features
+
+## Allowed Functions
+
+## Common Modules & Structure
 
 ## Git Collaboration & Workflow
 
@@ -43,3 +50,6 @@
 
 - **Resolve Conflicts:**
   In case of merge conflicts, resolve them manually by editing the affected files, then add and commit the changes.
+
+## General Resources
+
