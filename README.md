@@ -51,5 +51,6 @@
 - **Resolve Conflicts:**
   In case of merge conflicts, resolve them manually by editing the affected files, then add and commit the changes.
 
-## General Resources
+## General Resource
 
+[Cub3D Subject](cub3d_subject.pdf)
