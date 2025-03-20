@@ -1,50 +1,40 @@
-NAME	= cub3D
+NAME = raycaster
+HEADER = raycaster.h
+FLAGS = -Wall -Werror -Wextra -g
+SRC = main.c raycaster.c
+OBJ = $(SRC:.c=.o)
+CC = cc
+LIBFT_DIR = ./libft
+LIBFT_MAKE = $(LIBFT_DIR)/Makefile
+LIBFT = $(LIBFT_DIR)/libft.a
 
-CC		= cc
-CFLAGS	= -Wall -Wextra -Werror -g
-
-MINILIBX = ./minilibx-linux
-LIBFT	= ./libft/libft.a
-
-# Source Files
-SRC		= main.c input_handler.c
-
-OBJ		= $(SRC:.c=.o)
+LFLAGS = -Imlx_linux -lXext -lX11 -lm -lz
+MLX_DIR = ./minilibx-linux
+MLX_LIB = -L$(MLX_DIR) -lmlx
+MLX_A = ./minilibx-linux/libmlx_Linux.a
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(LIBFT) minilibx
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFT) -L$(MINILIBX) -lmlx -lXext -lX11 -lm
-	echo "$(NAME) generated"
+$(NAME): $(OBJ) $(LIBFT) $(MLX_A)
+	$(CC) $(FLAGS) -o $(NAME) $(OBJ) $(LIBFT) $(MLX_LIB) -L/usr/lib/ $(LFLAGS)
+
+%.o: %.c $(HEADER)
+	$(CC) $(FLAGS) -Iminilibx-linux -Iinclude -c $< -o $@
+
+$(MLX_A):
+	cd minilibx-linux; bash ./configure
 
 $(LIBFT):
-	make -C ./libft --no-print-directory
-	make bonus -C ./libft --no-print-directory
-	echo "libft compiled"
-
-minilibx:
-	make -C $(MINILIBX) --no-print-directory > /dev/null 2>&1
-	echo "minilibX compiled"
-
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	make -C $(LIBFT_DIR)
 
 clean:
-	make clean -C ./libft --no-print-directory
-	- make clean -C $(MINILIBX) --no-print-directory > /dev/null 2>&1
+	make -C $(LIBFT_DIR) clean
 	rm -f $(OBJ)
-	echo "object files deleted"
-	rm -f $(MINILIBX)/Makefile.gen $(MINILIBX)/test/Makefile.gen > /dev/null 2>&1
 
 fclean: clean
-	make fclean -C ./libft --no-print-directory
-	- make clean -C $(MINILIBX) --no-print-directory > /dev/null 2>&1
+	make -C $(LIBFT_DIR) fclean
 	rm -f $(NAME)
-	echo "$(NAME) deleted"
-	rm -f $(MINILIBX)/Makefile.gen $(MINILIBX)/test/Makefile.gen > /dev/null 2>&1
 
 re: fclean all
 
-.PHONY: all clean fclean re minilibx
-
-.SILENT:
+.PHONY: all clean fclean re
