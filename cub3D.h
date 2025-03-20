@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 13:08:51 by tmurua            #+#    #+#             */
-/*   Updated: 2025/03/20 16:34:11 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/03/20 18:06:29 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,27 @@
 /* main structure that can be passed as a parameter containing relevant data */
 typedef struct s_game
 {
-	// fields with relevant data, like map struct, player struct, etc.
+	/* Texture paths */
+	char	*no_texture;
+	char	*so_texture;
+	char	*we_texture;
+	char	*ea_texture;
+	/* Colors stored as 0xRRGGBB */
+	int		floor_color;
+	int		ceiling_color;
+	/* Map: an array of strings */
+	char	**map;
+	int		map_rows;
+	/* other game-related fields can be added here */
 }	t_game;
 
 /* function prototypes */
 /* input_handler.c */
 int		input_validation(int argc, char **argv, t_game *game);
-int		parse_map(t_game *game, const char *filename);
 int		init_game(t_game *game);
 
 /* parse_map.c */
+int		parse_map(t_game *game, const char *filename);
 
 /* get_next_line.c */
 char	*get_next_line(int fd);
