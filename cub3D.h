@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 13:08:51 by tmurua            #+#    #+#             */
-/*   Updated: 2025/03/19 13:23:25 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/03/20 11:42:21 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@
 /* functions of the math library (-lm man man 3 math) */
 # include <math.h>
 /* functions of the MinilibX library */
-# include <mlx.h>
+# include "minilibx-linux/mlx.h"
+# include "minilibx-linux/mlx_int.h"
 
 /* macros */
 
