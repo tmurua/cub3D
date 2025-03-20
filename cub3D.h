@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 13:08:51 by tmurua            #+#    #+#             */
-/*   Updated: 2025/03/20 12:50:12 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/03/20 16:34:11 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@
 # include "minilibx-linux/mlx_int.h"
 
 /* macros */
+/* buffer for get_next_line */
+# define BUFFER_SIZE 20
 
 /* stuctures */
 /* main structure that can be passed as a parameter containing relevant data */
@@ -42,6 +44,15 @@ typedef struct s_game
 
 /* function prototypes */
 /* input_handler.c */
-int	input_validation(int argc, char **argv, t_game *game);
+int		input_validation(int argc, char **argv, t_game *game);
+int		parse_map(t_game *game, const char *filename);
+int		init_game(t_game *game);
+
+/* parse_map.c */
+
+/* get_next_line.c */
+char	*get_next_line(int fd);
+char	*read_concatenate_line(int fd, char *left_c, char *buffer);
+char	*set_leftover_chars(char *current_line);
 
 #endif
