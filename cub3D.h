@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 13:08:51 by tmurua            #+#    #+#             */
-/*   Updated: 2025/03/20 11:42:21 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/03/20 12:50:12 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,15 @@
 
 /* macros */
 
-
 /* stuctures */
-
+/* main structure that can be passed as a parameter containing relevant data */
+typedef struct s_game
+{
+	// fields with relevant data, like map struct, player struct, etc.
+}	t_game;
 
 /* function prototypes */
-/* main.c */
+/* input_handler.c */
+int	input_validation(int argc, char **argv, t_game *game);
 
 #endif

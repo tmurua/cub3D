@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   input_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/19 13:07:15 by tmurua            #+#    #+#             */
-/*   Updated: 2025/03/20 12:49:19 by tmurua           ###   ########.fr       */
+/*   Created: 2025/03/20 12:47:53 by tmurua            #+#    #+#             */
+/*   Updated: 2025/03/20 12:48:26 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-/* will take a *.cub file, a map, as a parameter */
-int	main(int argc, char **argv)
+int	input_validation(int argc, char **argv, t_game *game)
 {
-	t_game	game;
-
-	if (!input_validation(argc, argv, &game))
-		return (1);
-
-	// main_loop(&game);
-	// clean_game(&game);
-	return (0);
+	if (argc != 2)
+	{
+		printf("Usage: %s <map_file.cub>\n", argv[0]);
+		return (0);
+	}
+	(void)game;
+	return (1);
 }
