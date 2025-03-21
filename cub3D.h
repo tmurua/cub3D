@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 13:08:51 by tmurua            #+#    #+#             */
-/*   Updated: 2025/03/20 18:06:29 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/03/21 07:15:44 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,10 @@ typedef struct s_game
 /* input_handler.c */
 int		input_validation(int argc, char **argv, t_game *game);
 int		init_game(t_game *game);
+
+/* error_utils.c */
+int		print_err(char *str_err);
+void	malloc_error(void);
 
 /* parse_map.c */
 int		parse_map(t_game *game, const char *filename);

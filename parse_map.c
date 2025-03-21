@@ -6,21 +6,24 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 13:55:47 by tmurua            #+#    #+#             */
-/*   Updated: 2025/03/20 19:41:24 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/03/21 07:35:47 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-/* checks if 'filename' ends with the ".cub" extension */
+/* compare last 4 chars of filename with ".cub" */
 int	has_cub_extension(const char *filename)
 {
-	size_t	len;
+	size_t	filename_length;
 
-	len = ft_strlen(filename);
-	if (len < 4)
+	filename_length = ft_strlen(filename);
+	if (filename_length < 4)
 		return (0);
-	return (ft_strncmp(filename + len - 4, ".cub", 4) == 0);
+	if (ft_strncmp(filename + filename_length - 4, ".cub", 4) == 0)
+		return (1);
+	else
+		return (0);
 }
 
 /* validates that the file has a ".cub" extension and then opens it */

@@ -15,7 +15,7 @@
     - [ ] Ensure no duplicate headers are present.
     - [ ] Ensure all required headers are found.
 
-  - [ ] **3. Map Layout Parsing:**
+  - [ ] **3. Map Layout Parsing:** (flood-fill algorithm?)
     - [ ] After processing headers, the remaining non-empty lines form the map.
     - [ ] Trim each line and append it to `t_game->map`.
     - [ ] Validate that the map only has allowed characters
