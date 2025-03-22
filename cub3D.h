@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 13:08:51 by tmurua            #+#    #+#             */
-/*   Updated: 2025/03/21 07:15:44 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/03/22 10:18:11 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int		print_err(char *str_err);
 void	malloc_error(void);
 
 /* parse_map.c */
-int		parse_map(t_game *game, const char *filename);
+int		parse_map(t_game *game, char *filename);
 
 /* get_next_line.c */
 char	*get_next_line(int fd);

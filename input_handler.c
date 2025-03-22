@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 12:47:53 by tmurua            #+#    #+#             */
-/*   Updated: 2025/03/21 07:29:00 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/03/22 11:01:26 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ int	input_validation(int argc, char **argv, t_game *game)
 {
 	if (argc != 2)
 		return (print_err("Usage: ./cub3D <map_file.cub>"));
-	if (!parse_map(game, argv[1]))
-		return (print_err("Error parsing scene file"));
-	if (!init_game(game))
-		return (print_err("Error initializing game"));
+	if (parse_map(game, argv[1]) == -1)
+		return (-1);
+	if (init_game(game) == -1)
+		return (-1);
 	(void)game;
 	return (1);
 }

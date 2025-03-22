@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 13:07:15 by tmurua            #+#    #+#             */
-/*   Updated: 2025/03/20 12:49:19 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/03/22 10:09:59 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int	main(int argc, char **argv)
 {
 	t_game	game;
 
-	if (!input_validation(argc, argv, &game))
-		return (1);
+	if (input_validation(argc, argv, &game) == -1)
+		return (-1);
 
 	// main_loop(&game);
 	// clean_game(&game);
