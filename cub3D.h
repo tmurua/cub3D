@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 13:08:51 by tmurua            #+#    #+#             */
-/*   Updated: 2025/03/22 10:18:11 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/03/22 16:01:33 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,9 @@ typedef struct s_game
 }	t_game;
 
 /* function prototypes */
+/* main.c */
+void	clean_game(t_game *game);
+
 /* input_handler.c */
 int		input_validation(int argc, char **argv, t_game *game);
 int		init_game(t_game *game);
@@ -61,9 +64,19 @@ int		init_game(t_game *game);
 /* error_utils.c */
 int		print_err(char *str_err);
 void	malloc_error(void);
+int		free_and_return(char *ptr, int ret);
 
 /* parse_map.c */
 int		parse_map(t_game *game, char *filename);
+int		open_cub_file(char *filename);
+int		has_cub_extension(char *filename);
+
+/* process_line c */
+int		process_line(char *input_line, t_game *game);
+int		is_header_line(char *line);
+int		process_header_line(char *line, t_game *game);
+int		process_map_line(char *line, t_game *game);
+void	ft_free_strs(char **strs);
 
 /* get_next_line.c */
 char	*get_next_line(int fd);

@@ -7,8 +7,9 @@ MINILIBX = ./minilibx-linux
 LIBFT	= ./libft/libft.a
 
 # Source Files
-SRC		=	main.c error_utils.c \
-			input_handler.c parse_map.c get_next_line.c
+SRC		=	main.c \
+			input_handler.c parse_map.c get_next_line.c \
+			error_utils.c process_line.c
 
 OBJ		= $(SRC:.c=.o)
 
