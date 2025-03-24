@@ -6,11 +6,11 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 07:04:20 by tmurua            #+#    #+#             */
-/*   Updated: 2025/03/22 15:31:27 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/03/24 11:34:55 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "../../include/cub3D.h"
 
 int	print_err(char *str_err)
 {

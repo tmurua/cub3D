@@ -6,11 +6,11 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 20:17:52 by tmurua            #+#    #+#             */
-/*   Updated: 2025/03/20 16:30:40 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/03/24 11:03:25 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "../../include/cub3D.h"
 
 /*	reads next line from the file descriptor 'fd'
 	returns the line (including newline, if present) and stores any leftover

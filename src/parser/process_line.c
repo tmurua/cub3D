@@ -6,11 +6,11 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 13:50:53 by tmurua            #+#    #+#             */
-/*   Updated: 2025/03/22 15:42:46 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/03/24 11:03:03 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "../../include/cub3D.h"
 
 /* trims single line from .cub file and delegates to header or map processing */
 int	process_line(char *input_line, t_game *game)

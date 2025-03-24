@@ -7,9 +7,13 @@ MINILIBX = ./minilibx-linux
 LIBFT	= ./libft/libft.a
 
 # Source Files
-SRC		=	main.c \
-			input_handler.c parse_map.c get_next_line.c \
-			error_utils.c process_line.c
+SRC		=	./src/main.c \
+			./src/input/input_handler.c \
+			./src/error/error_utils.c \
+			./src/parser/parse_map.c \
+			./src/parser/get_next_line.c \
+			./src/parser/process_line.c \
+			./src/game/game_cleanup.c
 
 OBJ		= $(SRC:.c=.o)
 

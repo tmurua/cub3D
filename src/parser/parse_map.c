@@ -6,11 +6,11 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 13:55:47 by tmurua            #+#    #+#             */
-/*   Updated: 2025/03/22 15:37:58 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/03/24 11:03:09 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "../../include/cub3D.h"
 
 /* opens .cub file, reads each line, and processes it using process_line() */
 int	parse_map(t_game *game, char *filename)

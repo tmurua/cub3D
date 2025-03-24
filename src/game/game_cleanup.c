@@ -1,32 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input_handler.c                                    :+:      :+:    :+:   */
+/*   game_cleanup.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/20 12:47:53 by tmurua            #+#    #+#             */
-/*   Updated: 2025/03/22 11:01:26 by tmurua           ###   ########.fr       */
+/*   Created: 2025/03/24 10:52:03 by tmurua            #+#    #+#             */
+/*   Updated: 2025/03/24 11:48:37 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "../../include/cub3D.h"
 
-int	input_validation(int argc, char **argv, t_game *game)
+void	clean_game(t_game *game)
 {
-	if (argc != 2)
-		return (print_err("Usage: ./cub3D <map_file.cub>"));
-	if (parse_map(game, argv[1]) == -1)
-		return (-1);
-	if (init_game(game) == -1)
-		return (-1);
-	(void)game;
-	return (1);
-}
+	int	i;
 
-int	init_game(t_game *game)
-{
-	// implement miniLibX window initialization, texture loading, player state...
-	(void)game;
-	return (1);
+	if (game->no_texture)
+		free(game->no_texture);
+	if (game->so_texture)
+		free(game->so_texture);
+	if (game->we_texture)
+		free(game->we_texture);
+	if (game->ea_texture)
+		free(game->ea_texture);
+	if (game->map)
+	{
+		i = 0;
+		while (game->map[i])
+		{
+			free(game->map[i]);
+			i++;
+		}
+		free(game->map);
+	}
 }
+/* ft lines: 20 */

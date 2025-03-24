@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 13:08:51 by tmurua            #+#    #+#             */
-/*   Updated: 2025/03/22 16:01:33 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/03/24 11:51:17 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define CUB3D_H
 
 /* libraries */
-# include "libft/libft.h"
+# include "../libft/libft.h"
 /* read(), write(), and close() */
 # include <unistd.h>
 /* open() */
@@ -28,8 +28,8 @@
 /* functions of the math library (-lm man man 3 math) */
 # include <math.h>
 /* functions of the MinilibX library */
-# include "minilibx-linux/mlx.h"
-# include "minilibx-linux/mlx_int.h"
+# include "../minilibx-linux/mlx.h"
+# include "../minilibx-linux/mlx_int.h"
 
 /* macros */
 /* buffer for get_next_line */
@@ -54,33 +54,33 @@ typedef struct s_game
 }	t_game;
 
 /* function prototypes */
-/* main.c */
-void	clean_game(t_game *game);
-
-/* input_handler.c */
+/* input/input_handler.c */
 int		input_validation(int argc, char **argv, t_game *game);
 int		init_game(t_game *game);
 
-/* error_utils.c */
+/* error/error_utils.c */
 int		print_err(char *str_err);
 void	malloc_error(void);
 int		free_and_return(char *ptr, int ret);
 
-/* parse_map.c */
+/* parser/parse_map.c */
 int		parse_map(t_game *game, char *filename);
 int		open_cub_file(char *filename);
 int		has_cub_extension(char *filename);
 
-/* process_line c */
+/* parser/process_line c */
 int		process_line(char *input_line, t_game *game);
 int		is_header_line(char *line);
 int		process_header_line(char *line, t_game *game);
 int		process_map_line(char *line, t_game *game);
 void	ft_free_strs(char **strs);
 
-/* get_next_line.c */
+/* parser/get_next_line.c */
 char	*get_next_line(int fd);
 char	*read_concatenate_line(int fd, char *left_c, char *buffer);
 char	*set_leftover_chars(char *current_line);
+
+/* game/game_cleanup.c */
+void	clean_game(t_game *game);
 
 #endif
