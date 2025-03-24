@@ -7,7 +7,7 @@
   - [ ] Parse the scene file (`*.cub`) to extract textures, floor/ceiling colors, and the 2D map.
   - [ ] Validate the map ensuring it is closed (surrounded by walls) and follows the proper format (allowed characters: `0`, `1`, `N`, `S`, `E`, `W`, and spaces).
   - [ ] Handle errors (e.g., invalid file format, missing elements) gracefully.
-  - [ ] The program must take as a first argument a scene description file with the `*.cub`
+  - [x] The program must take as a first argument a scene description file with the `*.cub`
 extension.
   - [ ] The map must be composed of only 6 possible characters: `0` for an empty space, `1` for a wall, and `N`,`S`,`E` or `W` for the player’s start position and spawning orientation.
 Example:

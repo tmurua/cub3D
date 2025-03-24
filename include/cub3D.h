@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 13:08:51 by tmurua            #+#    #+#             */
-/*   Updated: 2025/03/24 11:51:17 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/03/24 12:28:17 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int		free_and_return(char *ptr, int ret);
 
 /* parser/parse_map.c */
 int		parse_map(t_game *game, char *filename);
+int		process_file_lines(int fd, t_game *game, int *found_non_empty);
 int		open_cub_file(char *filename);
 int		has_cub_extension(char *filename);
 

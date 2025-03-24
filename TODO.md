@@ -12,8 +12,8 @@
            - [x] Open the file and return the file descriptor.
            - [x] Use `print_err()` to report errors and return -1.
    1.4. **Validate File Non-Emptiness**
-       - [ ] Read the first non-empty (trimmed) line.
-       - [ ] If no non-empty line is found, call `print_err("File is empty")` and return -1.
+       - [x] Read the first non-empty (trimmed) line.
+       - [x] If no non-empty line is found, call `print_err("File is empty")` and return -1.
 
 2. **Header Parsing (Textures & Colors)**
    2.1. **Define Valid Header Identifiers**

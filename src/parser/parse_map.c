@@ -6,35 +6,57 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 13:55:47 by tmurua            #+#    #+#             */
-/*   Updated: 2025/03/24 11:03:09 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/03/24 13:25:56 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
-/* opens .cub file, reads each line, and processes it using process_line() */
+/* opens .cub, check if file is empty, reads each line, and processes it */
 int	parse_map(t_game *game, char *filename)
 {
-	int		fd;
-	char	*input_line;
-	int		result;
+	int	fd;
+	int	found_non_empty;
+	int	result;
 
+	found_non_empty = 0;
 	fd = open_cub_file(filename);
 	if (fd < 0)
 		return (-1);
+	result = process_file_lines(fd, game, &found_non_empty);
+	close(fd);
+	if (result == -1)
+		return (-1);
+	if (!found_non_empty)
+		return (print_err("File is empty"));
+	return (1);
+}
+/* ft lines: 15 */
+
+/*	read every line from file, trim whitespace from each line, update flag
+	if a non‑empty line is encountered, and then process each line */
+int	process_file_lines(int fd, t_game *game, int *found_non_empty)
+{
+	char	*input_line;
+	char	*trimmed_line;
+	int		result;
+
 	input_line = get_next_line(fd);
 	while (input_line != NULL)
 	{
-		result = process_line(input_line, game);
+		trimmed_line = ft_strtrim(input_line, " \n\r\t");
 		free(input_line);
-		if (result == -1)
+		if (trimmed_line)
 		{
-			close(fd);
-			return (-1);
+			if (trimmed_line[0] != '\0')
+				*found_non_empty = 1;
+			result = process_line(trimmed_line, game);
+			free(trimmed_line);
+			if (result == -1)
+				return (-1);
 		}
 		input_line = get_next_line(fd);
 	}
-	close(fd);
 	return (1);
 }
 /* ft lines: 21 */
