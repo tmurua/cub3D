@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_map.c                                        :+:      :+:    :+:   */
+/*   parse_cub_file.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 13:55:47 by tmurua            #+#    #+#             */
-/*   Updated: 2025/03/24 13:25:56 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/03/24 16:40:48 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
 /* opens .cub, check if file is empty, reads each line, and processes it */
-int	parse_map(t_game *game, char *filename)
+int	parse_cub_file(t_game *game, char *filename)
 {
 	int	fd;
 	int	found_non_empty;

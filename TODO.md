@@ -22,16 +22,16 @@
        - [x] Create `is_header_line()` to check if a trimmed line is a header.
    2.3. **Process Texture Lines**
        - [x] Remove the identifier (e.g., "NO ") from the header line.
-       - [ ] (Optional) Validate that the texture file exists and has a proper extension (e.g., ".xpm").
-       - [ ] Ensure that duplicate texture entries are not allowed.
+       - [x] Validate that the texture file exists and has a proper extension (e.g., ".xpm").
+       - [x] Ensure that duplicate texture entries are not allowed.
    2.4. **Process Color Lines**
        - [x] Remove the identifier (e.g., "F " or "C ") from the line and store the color (currently via ft_atoi).
-       - [ ] Split the remainder by commas.
-       - [ ] Trim each resulting substring.
-       - [ ] Validate that there are exactly three numeric parts.
-       - [ ] Convert each part to an integer and ensure it’s between 0 and 255.
-       - [ ] Combine the three values into a single integer (0xRRGGBB).
-       - [ ] Ensure that duplicate color entries are not allowed.
+       - [x] Split the remainder by commas.
+       - [x] Trim each resulting substring.
+       - [x] Validate that there are exactly three numeric parts.
+       - [x] Convert each part to an integer and ensure it’s between 0 and 255.
+       - [x] Combine the three values into a single integer (0xRRGGBB).
+       - [x] Ensure that duplicate color entries are not allowed.
    2.5. **Final Header Validation**
        - [ ] After processing header lines, verify that all required headers (4 textures and 2 colors) are present.
        - [ ] Report an error if any header is missing.

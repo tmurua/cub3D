@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 13:08:51 by tmurua            #+#    #+#             */
-/*   Updated: 2025/03/24 12:28:17 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/03/24 16:11:18 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,37 +51,56 @@ typedef struct s_game
 	char	**map;
 	int		map_rows;
 	/* other game-related fields can be added here */
-}	t_game;
+	int		hdr_no;
+	int		hdr_so;
+	int		hdr_we;
+	int		hdr_ea;
+	int		hdr_f;
+	int		hdr_c;
+}			t_game;
 
 /* function prototypes */
 /* input/input_handler.c */
-int		input_validation(int argc, char **argv, t_game *game);
-int		init_game(t_game *game);
+int			input_validation(int argc, char **argv, t_game *game);
+int			init_game(t_game *game);
 
 /* error/error_utils.c */
-int		print_err(char *str_err);
-void	malloc_error(void);
-int		free_and_return(char *ptr, int ret);
+int			print_err(char *str_err);
+void		malloc_error(void);
+int			free_and_return(char *ptr, int ret);
 
-/* parser/parse_map.c */
-int		parse_map(t_game *game, char *filename);
-int		process_file_lines(int fd, t_game *game, int *found_non_empty);
-int		open_cub_file(char *filename);
-int		has_cub_extension(char *filename);
+/* parser/parse_cub_file.c */
+int			parse_cub_file(t_game *game, char *filename);
+int			process_file_lines(int fd, t_game *game, int *found_non_empty);
+int			open_cub_file(char *filename);
+int			has_cub_extension(char *filename);
 
 /* parser/process_line c */
-int		process_line(char *input_line, t_game *game);
-int		is_header_line(char *line);
-int		process_header_line(char *line, t_game *game);
-int		process_map_line(char *line, t_game *game);
-void	ft_free_strs(char **strs);
+int			process_line(char *input_line, t_game *game);
+int			is_header_line(char *line);
+int			process_map_line(char *line, t_game *game);
+void		ft_free_strs(char **strs);
 
 /* parser/get_next_line.c */
-char	*get_next_line(int fd);
-char	*read_concatenate_line(int fd, char *left_c, char *buffer);
-char	*set_leftover_chars(char *current_line);
+char		*get_next_line(int fd);
+char		*read_concatenate_line(int fd, char *left_c, char *buffer);
+char		*set_leftover_chars(char *current_line);
+
+/* parser/parse_header.c */
+int			parse_header_line(char *line, t_game *game);
+int			parse_color_line(char *line, int *color_out);
+int			validate_color_tokens(char **tokens, int *red, int *green,
+				int *blue);
+int			parse_texture_line(char *line, char **texture_out);
+int			has_xpm_extension(char *filename);
+
+/* parser/parser_utils.c */
+int			handle_texture_header(char *dup_msg, char *line, int *hdr_flag,
+				char **texture_field);
+int			handle_color_header(char *dup_msg, char *line, int *hdr_flag,
+				int *color_field);
 
 /* game/game_cleanup.c */
-void	clean_game(t_game *game);
+void		clean_game(t_game *game);
 
 #endif
