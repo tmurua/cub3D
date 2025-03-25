@@ -33,19 +33,19 @@
        - [x] Combine the three values into a single integer (0xRRGGBB).
        - [x] Ensure that duplicate color entries are not allowed.
    2.5. **Final Header Validation**
-       - [ ] After processing header lines, verify that all required headers (4 textures and 2 colors) are present.
-       - [ ] Report an error if any header is missing.
+       - [x] After processing header lines, verify that all required headers (4 textures and 2 colors) are present.
+       - [x] Report an error if any header is missing.
 
 3. **Map Layout Parsing**
    3.1. **Determine Transition from Headers to Map**
-       - [ ] In the main parsing loop, detect when header processing is complete (e.g., when a line starts with '1' or contains map-specific characters).
-       - [ ] Set a flag (e.g., `header_done`) when transitioning from header lines to map lines.
+       - [x] In the main parsing loop, detect when header processing is complete (e.g., when a line starts with '1' or contains map-specific characters).
+       - [x] Set a flag (e.g., `header_done`) when transitioning from header lines to map lines.
    3.2. **Extract Map Lines**
        - [ ] For each line after headers, trim the line.
        - [ ] Append the trimmed map line to a dynamically allocated array (e.g., `t_game->map->map`).
    3.3. **Validate Allowed Map Characters**
        - [ ] Iterate through the map array.
-       - [ ] Ensure each character is one of: `'0'`, `'1'`, `'N'`, `'S'`, `'E'`, `'W'`, or space.
+       - [x] Ensure each character is one of: `'0'`, `'1'`, `'N'`, `'S'`, `'E'`, `'W'`, or space.
        - [ ] Report an error if any invalid character is found.
 
 4. **Advanced Map Validation**

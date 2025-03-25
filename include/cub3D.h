@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 13:08:51 by tmurua            #+#    #+#             */
-/*   Updated: 2025/03/24 16:11:18 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/03/25 19:54:29 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,13 @@ int			handle_texture_header(char *dup_msg, char *line, int *hdr_flag,
 				char **texture_field);
 int			handle_color_header(char *dup_msg, char *line, int *hdr_flag,
 				int *color_field);
+
+/* parser/parse_map.c */
+int			validate_map_layout(t_game *game);
+int			validate_all_borders(t_game *game);
+int			validate_row_borders(char *row);
+int			validate_allowed_chars(t_game *game);
+int			is_allowed_map_char(char c);
 
 /* game/game_cleanup.c */
 void		clean_game(t_game *game);
