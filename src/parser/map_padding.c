@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 15:08:12 by tmurua            #+#    #+#             */
-/*   Updated: 2025/03/26 16:29:37 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/03/26 17:39:04 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 /*	creates a rectangular copy of game->map by first computing the maximum
 	trimmed row length, then creating a padded copy of each row with pad_row()
 	with wall characters ('1') if necessary;
-	returns the new array and sets *cols to the maximum length;
-	returns NULL on allocation failure. */
+	returns the new array and sets *cols to the maximum length */
 char	**copy_map_padded(t_game *game, int *cols)
 {
 	int		max_len;
@@ -45,7 +44,6 @@ char	**copy_map_padded(t_game *game, int *cols)
 	}
 	return (copy);
 }
-/* ft lines: 25 */
 
 /*	iterates over game->map and returns max length among all rows
 	after trimming leading and trailing spaces */
@@ -71,7 +69,6 @@ int	get_max_trimmed_length(t_game *game)
 	}
 	return (max);
 }
-/* ft lines: 19 */
 
 /*	creates a new string for a single row by trimming it and then padding it
 	with wall characters ('1') to reach the specified max_len;
@@ -94,7 +91,6 @@ char	*pad_row(char *row, int max_len)
 	free(trim);
 	return (padded);
 }
-/* ft lines: 15 */
 
 /*	fills the 'padded' string with the contents of 'trim' up to its length,
 	and pads the rest with wall characters ('1') until reaching max_len */
@@ -114,7 +110,6 @@ void	fill_padded_row(char *padded, char *trim, int max_len)
 		j++;
 	}
 }
-/* ft lines: 13 */
 
 /* frees a rectangular map copy created by copy_map() */
 void	free_map_copy(char **map_copy, int rows)
@@ -129,4 +124,3 @@ void	free_map_copy(char **map_copy, int rows)
 	}
 	free(map_copy);
 }
-/* ft lines: 9 */

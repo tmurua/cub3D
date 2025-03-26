@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 13:08:51 by tmurua            #+#    #+#             */
-/*   Updated: 2025/03/26 16:33:26 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/03/26 17:31:12 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,6 @@ int				has_cub_extension(char *filename);
 int				process_line(char *input_line, t_game *game);
 int				is_header_line(char *line);
 int				process_map_line(char *line, t_game *game);
-void			ft_free_strs(char **strs);
 
 /* parser/get_next_line.c */
 char			*get_next_line(int fd);
@@ -129,6 +128,7 @@ int				handle_texture_header(char *dup_msg, char *line, int *hdr_flag,
 					char **texture_field);
 int				handle_color_header(char *dup_msg, char *line, int *hdr_flag,
 					int *color_field);
+void			ft_free_strs(char **strs);
 
 /* parser/parse_map.c */
 int				validate_map_layout(t_game *game);
@@ -138,7 +138,7 @@ int				validate_allowed_chars(t_game *game);
 int				is_allowed_map_char(char c);
 
 /* parser/validate_map.c */
-int				validate_map_advanced(t_game *game);
+int				validate_map_requirements(t_game *game);
 int				validate_player_position(t_game *game);
 int				process_player_in_cell(t_game *game, int row, int col,
 					int *found);

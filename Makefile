@@ -15,8 +15,8 @@ SRC		=	./src/main.c \
 			./src/parser/process_line.c \
 			./src/parser/parse_header.c \
 			./src/parser/parser_utils.c \
-			./src/parser/parse_map.c \
-			./src/parser/validate_map.c \
+			./src/parser/validate_map_layout.c \
+			./src/parser/validate_map_requirements.c \
 			./src/parser/flood_fill_algorithm.c \
 			./src/parser/map_padding.c \
 			./src/game/game_cleanup.c

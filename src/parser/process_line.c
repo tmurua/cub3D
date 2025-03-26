@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 13:50:53 by tmurua            #+#    #+#             */
-/*   Updated: 2025/03/26 16:30:15 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/03/26 17:42:27 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int	process_line(char *input_line, t_game *game)
 	free(trimmed_line);
 	return (1);
 }
-/* ft lines: 16 */
 
 /*	returns 1 if trimmed line begins with valid header identifier, else 0 */
 int	is_header_line(char *line)
@@ -51,10 +50,8 @@ int	is_header_line(char *line)
 		return (1);
 	return (0);
 }
-/* ft lines: 13 */
 
-/*	appends a map line to the game->map array;
-	game->map field is assumed to be a NULL-terminated array of strings */
+/*	appends a map line to the game->mapdata.map array */
 int	process_map_line(char *line, t_game *game)
 {
 	char	**new_map;
@@ -81,18 +78,3 @@ int	process_map_line(char *line, t_game *game)
 	game->mapdata.rows++;
 	return (1);
 }
-/* ft lines: 23 */
-
-void	ft_free_strs(char **strs)
-{
-	int	i;
-
-	i = 0;
-	while (strs && strs[i])
-	{
-		free(strs[i]);
-		i++;
-	}
-	free(strs);
-}
-/* ft lines: 9 */

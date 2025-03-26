@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 13:39:43 by tmurua            #+#    #+#             */
-/*   Updated: 2025/03/26 16:46:38 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/03/26 17:25:26 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int	parse_header_line(char *line, t_game *game)
 	else
 		return (print_err("Unknown header identifier"));
 }
-/* ft lines: 20 */
 
 /*	expects line formats like "F 155,155,155" or "C 204,229,255";
 	extracts substr after the identifier ("F " or "C "), splits it by commas;
@@ -64,7 +63,6 @@ int	parse_color_line(char *line, int *color_out)
 	ft_free_strs(tokens);
 	return (1);
 }
-/* ft lines: 18 */
 
 /*	checks that tokens contains exactly three numeric strings;
 	converts each token to an integer and verifies they are between 0 and 255;
@@ -93,7 +91,6 @@ int	validate_color_tokens(char **tokens, int *red, int *green, int *blue)
 	}
 	return (1);
 }
-/* ft lines: 20 */
 
 /*	expects a line like "NO textures/wolfenstein/grey_stone.xpm";
 	skips the identifier, trims the remainder, and then checks that the file
@@ -124,7 +121,6 @@ int	parse_texture_line(char *line, char **texture_out)
 	*texture_out = path;
 	return (1);
 }
-/* ft lines: 22 */
 
 /* checks if the given filename ends with ".xpm" */
 int	has_xpm_extension(char *filename)
@@ -138,4 +134,3 @@ int	has_xpm_extension(char *filename)
 		return (1);
 	return (-1);
 }
-/* ft lines: 8 */

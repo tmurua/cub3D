@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 13:55:47 by tmurua            #+#    #+#             */
-/*   Updated: 2025/03/26 12:10:19 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/03/26 17:31:12 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,10 @@ int	parse_cub_file(t_game *game, char *filename)
 		return (print_err("File is empty"));
 	if (validate_map_layout(game) == -1)
 		return (-1);
-	if (validate_map_advanced(game) == -1)
+	if (validate_map_requirements(game) == -1)
 		return (-1);
 	return (1);
 }
-/* ft lines: 19 */
 
 /*	read every line from file, trim whitespace from each line, update flag
 	if a non‑empty line is encountered, and then process each line */
@@ -64,7 +63,6 @@ int	process_file_lines(int fd, t_game *game, int *found_non_empty)
 	}
 	return (1);
 }
-/* ft lines: 21 */
 
 /* validates that the file has a ".cub" extension and then opens it */
 int	open_cub_file(char *filename)
@@ -78,7 +76,6 @@ int	open_cub_file(char *filename)
 		return (print_err("Error opening *.cub file"));
 	return (fd);
 }
-/* ft lines: 8 */
 
 /* compare last 4 chars of filename with ".cub" */
 int	has_cub_extension(char *filename)
@@ -93,4 +90,3 @@ int	has_cub_extension(char *filename)
 	else
 		return (-1);
 }
-/* ft lines: 9 */

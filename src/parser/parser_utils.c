@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 16:07:35 by tmurua            #+#    #+#             */
-/*   Updated: 2025/03/24 16:16:54 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/03/26 17:25:51 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	handle_texture_header(char *dup_msg, char *line, int *hdr_flag,
 	*hdr_flag = 1;
 	return (1);
 }
-/* ft lines: 6 */
 
 /* checks duplicate using *hdr_flag, then calls parse_color_line() */
 int	handle_color_header(char *dup_msg, char *line, int *hdr_flag,
@@ -36,4 +35,16 @@ int	handle_color_header(char *dup_msg, char *line, int *hdr_flag,
 	*hdr_flag = 1;
 	return (1);
 }
-/* ft lines: 6 */
+
+void	ft_free_strs(char **strs)
+{
+	int	i;
+
+	i = 0;
+	while (strs && strs[i])
+	{
+		free(strs[i]);
+		i++;
+	}
+	free(strs);
+}

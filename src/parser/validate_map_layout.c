@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_map.c                                        :+:      :+:    :+:   */
+/*   validate_map_layout.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 11:16:37 by tmurua            #+#    #+#             */
-/*   Updated: 2025/03/26 16:38:42 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/03/26 17:29:15 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,9 @@ int	validate_map_layout(t_game *game)
 		return (-1);
 	return (1);
 }
-/* ft lines: 5 */
 
 /*	checks that top and bottom rows (after trimming) have proper borders,
-	and that every row (trimmed) starts and ends with a wall ('1') */
+	and that every row (trimmed) starts and ends with a wall, '1' */
 int	validate_all_borders(t_game *game)
 {
 	int	i;
@@ -42,10 +41,9 @@ int	validate_all_borders(t_game *game)
 	}
 	return (1);
 }
-/* ft lines: 14 */
 
 /*	trims leading and trailing spaces from a map row and checks that first and
-	last characters of the trimmed row are '1'. Returns 1 if valid, else -1 */
+	last characters of the trimmed row are '1'; returns 1 if valid, else -1 */
 int	validate_row_borders(char *row)
 {
 	char	*trimmed;
@@ -63,7 +61,6 @@ int	validate_row_borders(char *row)
 	free(trimmed);
 	return (1);
 }
-/* ft lines: 14 */
 
 /* iterates over every row in game->map and checks if every char is allowed */
 int	validate_allowed_chars(t_game *game)
@@ -87,7 +84,6 @@ int	validate_allowed_chars(t_game *game)
 	}
 	return (1);
 }
-/* ft lines: 18 */
 
 /* returns 1 if the character c is in the allowed set, 0 otherwise */
 int	is_allowed_map_char(char c)
@@ -105,4 +101,3 @@ int	is_allowed_map_char(char c)
 	}
 	return (0);
 }
-/* ft lines: 12 */

@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 15:03:51 by tmurua            #+#    #+#             */
-/*   Updated: 2025/03/26 16:24:00 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/03/26 17:35:14 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	perform_flood_fill(t_game *game)
 		return (print_err("Map is not enclosed by walls"));
 	return (1);
 }
-/* ft lines: 15 */
 
 /*	wraps a padded map copy into a temporary t_game structure and calls
 	flood_fill() starting from (start_rows, start_cols) */
@@ -48,10 +47,9 @@ int	flood_fill_on_copy(char **map_copy, int rows, int cols, t_mapdata *start)
 }
 
 /*	recursively fills empty space starting from (r, c) in map;
-	if it goes out-of-bound or reaches a cell that is not '0',
-		a wall or visited,
+	if it goes out-of-bound or reaches a cell that is not '0', a wall or visited,
 	returns -1 to indicate that the flood has escaped;
-	marks visited cells as 'V'; returns 0 on success. */
+	marks visited cells as 'V'; returns 0 on success */
 int	flood_fill(t_game *game, int r, int c)
 {
 	if (r < 0 || c < 0 || r >= game->mapdata.rows || c >= game->mapdata.cols)
@@ -71,4 +69,3 @@ int	flood_fill(t_game *game, int r, int c)
 		return (-1);
 	return (0);
 }
-/* ft lines: 16 */

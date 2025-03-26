@@ -47,15 +47,15 @@
 
 4. **Advanced Map Validation**
    4.1. **Map Enclosure Check (Flood Fill)**
-       - [ ] Implement a flood-fill algorithm starting from the player’s starting position (or any '0' cell).
-       - [ ] Ensure the flood-fill does not leak outside the map boundaries.
-       - [ ] Report an error if the map is not properly enclosed.
+       - [x] Implement a flood-fill algorithm starting from the player’s starting position (or any '0' cell).
+       - [x] Ensure the flood-fill does not leak outside the map boundaries.
+       - [x] Report an error if the map is not properly enclosed.
    4.2. **Player Position Validation**
-       - [ ] Ensure that exactly one player starting position exists in the map.
-       - [ ] Store the player’s coordinates and view direction in `t_game`.
-   4.3. **(Optional) Map Rectangularity**
-       - [ ] Check if the map is rectangular.
-       - [ ] If not, convert the map into a rectangle (using padding) with a helper function.
+       - [x] Ensure that exactly one player starting position exists in the map.
+       - [x] Store the player’s coordinates and view direction in `t_game`.
+   4.3. **Map Rectangularity**
+       - [x] Check if the map is rectangular.
+       - [x] If not, convert the map into a rectangle (using padding) with a helper function.
 
 5. **Error Handling & Memory Management**
    5.1. **Centralized Error Reporting**
@@ -63,31 +63,20 @@
    5.2. **Standardize Return Conventions**
        - [x] Ensure functions return 1 on success and -1 on error.
    5.3. **Memory Cleanup on Error**
-       - [ ] Ensure that all allocated memory is freed on error (e.g., via a `clean_game()` function).
-       - [ ] Implement additional cleanup functions if needed for partially parsed data.
-   5.4. **Consistent Error Function Usage**
-       - [ ] Update all modules (parsing, file reading, header processing, map validation) to use `print_err()` and `malloc_error()` consistently.
+       - [x] Ensure that all allocated memory is freed on error (e.g., via a `clean_game()` function).
 
 6. **Integration and Testing**
    6.1. **Unit Testing Individual Functions**
-       - [ ] Test file extension checking.
-       - [ ] Test file opening and empty file detection.
-       - [ ] Test header line parsing (texture and color lines) with valid and invalid inputs.
+       - [x] Test file extension checking.
+       - [x] Test file opening and empty file detection.
+       - [x] Test header line parsing (texture and color lines) with valid and invalid inputs.
        - [ ] Test map layout parsing and character validation.
        - [ ] Test flood-fill and player position validation.
    6.2. **Integration Tests**
-       - [ ] Run the complete parsing flow with known valid `.cub` files.
-       - [ ] Run the parsing flow with various invalid files (wrong extension, missing headers, invalid map, etc.).
+       - [x] Run the complete parsing flow with known valid `.cub` files.
+       - [x] Run the parsing flow with various invalid files (wrong extension, missing headers, invalid map, etc.).
    6.3. **Refactor and Optimize**
        - [ ] Review and refactor code based on test results and code review.
        - [ ] Ensure code follows SRP, DRY, and KISS principles throughout.
 
-7. **Future Enhancements**
-   7.1. **Improve Error Messaging**
-       - [ ] Add error codes or more detailed context to error messages.
-   7.2. **Optimize Parsing Performance**
-       - [ ] Refactor performance-critical sections as needed.
-   7.3. **Extend Map Validation**
-       - [ ] Enhance the flood-fill algorithm for edge cases.
-       - [ ] Support more advanced map features if required by the project.
 
