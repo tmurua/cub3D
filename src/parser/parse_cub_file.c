@@ -6,12 +6,14 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 13:55:47 by tmurua            #+#    #+#             */
-/*   Updated: 2025/03/25 19:38:44 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/03/26 12:10:19 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
+/*	opens .cub file, checks if it's empty, processes every line, and validates
+	basic map layout & advanced validations (player pos and flood fill enclos)*/
 int	parse_cub_file(t_game *game, char *filename)
 {
 	int	fd;
@@ -30,9 +32,11 @@ int	parse_cub_file(t_game *game, char *filename)
 		return (print_err("File is empty"));
 	if (validate_map_layout(game) == -1)
 		return (-1);
+	if (validate_map_advanced(game) == -1)
+		return (-1);
 	return (1);
 }
-/* ft lines: 17 */
+/* ft lines: 19 */
 
 /*	read every line from file, trim whitespace from each line, update flag
 	if a non‑empty line is encountered, and then process each line */

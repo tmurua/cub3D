@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 13:08:51 by tmurua            #+#    #+#             */
-/*   Updated: 2025/03/25 19:54:29 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/03/26 13:50:32 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,27 +36,30 @@
 # define BUFFER_SIZE 20
 
 /* stuctures */
-/* main structure that can be passed as a parameter containing relevant data */
+/*	main structure that can be passed as a parameter containing relevant data:
+	Texture paths:				char	*no_texture; etc.
+	Colors stored as 0xRRGGBB:	int		floor_color; etc.
+	Map is an array of strings:	char	**map;
+	*/
 typedef struct s_game
 {
-	/* Texture paths */
 	char	*no_texture;
 	char	*so_texture;
 	char	*we_texture;
 	char	*ea_texture;
-	/* Colors stored as 0xRRGGBB */
 	int		floor_color;
 	int		ceiling_color;
-	/* Map: an array of strings */
 	char	**map;
 	int		map_rows;
-	/* other game-related fields can be added here */
 	int		hdr_no;
 	int		hdr_so;
 	int		hdr_we;
 	int		hdr_ea;
 	int		hdr_f;
 	int		hdr_c;
+	double	player_x;
+	double	player_y;
+	char	player_orientation;
 }			t_game;
 
 /* function prototypes */
@@ -106,6 +109,17 @@ int			validate_all_borders(t_game *game);
 int			validate_row_borders(char *row);
 int			validate_allowed_chars(t_game *game);
 int			is_allowed_map_char(char c);
+
+/* parser/validate_map.c */
+int			validate_map_advanced(t_game *game);
+int			validate_player_position(t_game *game);
+int			process_player_in_cell(t_game *game, int row, int col, int *found);
+int			perform_flood_fill(t_game *game);
+int			flood_fill(char **map, int rows, int cols, int r, int c);
+char		**copy_map_padded(t_game *game, int *cols);
+int			get_max_trimmed_length(t_game *game);
+char		*pad_row(char *row, int max_len);
+void		free_map_copy(char **map_copy, int rows);
 
 /* game/game_cleanup.c */
 void		clean_game(t_game *game);

@@ -16,6 +16,7 @@ SRC		=	./src/main.c \
 			./src/parser/parse_header.c \
 			./src/parser/parser_utils.c \
 			./src/parser/parse_map.c \
+			./src/parser/validate_map.c \
 			./src/game/game_cleanup.c
 
 OBJ		= $(SRC:.c=.o)
