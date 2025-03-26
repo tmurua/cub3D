@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 13:08:51 by tmurua            #+#    #+#             */
-/*   Updated: 2025/03/26 13:50:32 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/03/26 15:51:39 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,8 @@
 /* stuctures */
 /*	main structure that can be passed as a parameter containing relevant data:
 	Texture paths:				char	*no_texture; etc.
-	Colors stored as 0xRRGGBB:	int		floor_color; etc.
-	Map is an array of strings:	char	**map;
-	*/
+	Colors stored as 0xRRGGBB:	int		floor_color; ceiling_color;
+	Map is an array of strings:	char	**map; */
 typedef struct s_game
 {
 	char	*no_texture;
@@ -51,6 +50,7 @@ typedef struct s_game
 	int		ceiling_color;
 	char	**map;
 	int		map_rows;
+	int		map_cols;
 	int		hdr_no;
 	int		hdr_so;
 	int		hdr_we;
@@ -61,6 +61,12 @@ typedef struct s_game
 	double	player_y;
 	char	player_orientation;
 }			t_game;
+
+typedef struct s_coord
+{
+	int		r;
+	int		c;
+}			t_coord;
 
 /* function prototypes */
 /* input/input_handler.c */
@@ -114,11 +120,18 @@ int			is_allowed_map_char(char c);
 int			validate_map_advanced(t_game *game);
 int			validate_player_position(t_game *game);
 int			process_player_in_cell(t_game *game, int row, int col, int *found);
+
+/* parser/flood_fill_algorithm.c */
 int			perform_flood_fill(t_game *game);
-int			flood_fill(char **map, int rows, int cols, int r, int c);
+int			flood_fill_on_copy(char **map_copy, int rows, int cols,
+				t_coord *start);
+int			flood_fill(t_game *game, int r, int c);
+
+/* parser/map_padding.c */
 char		**copy_map_padded(t_game *game, int *cols);
 int			get_max_trimmed_length(t_game *game);
 char		*pad_row(char *row, int max_len);
+void		fill_padded_row(char *padded, char *trim, int max_len);
 void		free_map_copy(char **map_copy, int rows);
 
 /* game/game_cleanup.c */
