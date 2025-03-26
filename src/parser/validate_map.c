@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 11:48:39 by tmurua            #+#    #+#             */
-/*   Updated: 2025/03/26 15:10:15 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/03/26 16:28:57 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	validate_map_advanced(t_game *game)
 }
 /* ft lines: 5 */
 
-/*	scans game->map for a starting position indicated by 'N', 'S', 'E', or 'W';
+/*	scans game->mapdata.map for start pos indicated by 'N', 'S', 'E', or 'W';
 	ensures exactly one starting position exists; stores the player's centered
 	coords and orientation in game, and replaces the starting cell with '0' */
 int	validate_player_position(t_game *game)
@@ -36,10 +36,10 @@ int	validate_player_position(t_game *game)
 
 	found = 0;
 	i = 0;
-	while (i < game->map_rows)
+	while (i < game->mapdata.rows)
 	{
 		j = 0;
-		while (game->map[i][j])
+		while (game->mapdata.map[i][j])
 		{
 			if (process_player_in_cell(game, i, j, &found) == -1)
 				return (-1);
@@ -60,17 +60,18 @@ int	validate_player_position(t_game *game)
 	returns 1 on success or -1 if a duplicate player is found */
 int	process_player_in_cell(t_game *game, int row, int col, int *found)
 {
-	if (game->map[row][col] == 'N' || game->map[row][col] == 'S' ||
-		game->map[row][col] == 'E' || game->map[row][col] == 'W')
+	if (game->mapdata.map[row][col] == 'N' || game->mapdata.map[row][col] == 'S'
+		|| game->mapdata.map[row][col] == 'E'
+		|| game->mapdata.map[row][col] == 'W')
 	{
 		if (*found)
 			return (print_err("Multiple player positions found"));
 		*found = 1;
-		game->player_x = col + 0.5;
-		game->player_y = row + 0.5;
-		game->player_orientation = game->map[row][col];
-		game->map[row][col] = '0';
+		game->player.x = col + 0.5;
+		game->player.y = row + 0.5;
+		game->player.orientation = game->mapdata.map[row][col];
+		game->mapdata.map[row][col] = '0';
 	}
 	return (1);
 }
-/* ft lines: 12 */
+/* ft lines: 13 */

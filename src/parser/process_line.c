@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 13:50:53 by tmurua            #+#    #+#             */
-/*   Updated: 2025/03/24 16:42:47 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/03/26 16:30:15 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,13 @@ int	process_map_line(char *line, t_game *game)
 	char	**new_map;
 	int		i;
 
-	new_map = ft_calloc(game->map_rows + 2, sizeof(char *));
+	new_map = ft_calloc(game->mapdata.rows + 2, sizeof(char *));
 	if (!new_map)
 		return (print_err("Memory allocation failed"));
 	i = 0;
-	while (i < game->map_rows)
+	while (i < game->mapdata.rows)
 	{
-		new_map[i] = game->map[i];
+		new_map[i] = game->mapdata.map[i];
 		i++;
 	}
 	new_map[i] = ft_strdup(line);
@@ -76,9 +76,9 @@ int	process_map_line(char *line, t_game *game)
 		return (print_err("Memory allocation failed"));
 	}
 	new_map[i + 1] = NULL;
-	free(game->map);
-	game->map = new_map;
-	game->map_rows++;
+	free(game->mapdata.map);
+	game->mapdata.map = new_map;
+	game->mapdata.rows++;
 	return (1);
 }
 /* ft lines: 23 */

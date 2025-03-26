@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 13:39:43 by tmurua            #+#    #+#             */
-/*   Updated: 2025/03/24 16:16:09 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/03/26 16:46:38 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,22 @@ int	parse_header_line(char *line, t_game *game)
 {
 	if (ft_strncmp(line, "NO", 2) == 0)
 		return (handle_texture_header("Duplicate NO header", line,
-				&game->hdr_no, &game->no_texture));
+				&game->header.hdr_no, &game->texture.no));
 	else if (ft_strncmp(line, "SO", 2) == 0)
 		return (handle_texture_header("Duplicate SO header", line,
-				&game->hdr_so, &game->so_texture));
+				&game->header.hdr_so, &game->texture.so));
 	else if (ft_strncmp(line, "WE", 2) == 0)
 		return (handle_texture_header("Duplicate WE header", line,
-				&game->hdr_we, &game->we_texture));
+				&game->header.hdr_we, &game->texture.we));
 	else if (ft_strncmp(line, "EA", 2) == 0)
 		return (handle_texture_header("Duplicate EA header", line,
-				&game->hdr_ea, &game->ea_texture));
+				&game->header.hdr_ea, &game->texture.ea));
 	else if (ft_strncmp(line, "F", 1) == 0)
 		return (handle_color_header("Duplicate Floor header", line,
-				&game->hdr_f, &game->floor_color));
+				&game->header.hdr_f, &game->color.floor));
 	else if (ft_strncmp(line, "C", 1) == 0)
 		return (handle_color_header("Duplicate Ceiling header", line,
-				&game->hdr_c, &game->ceiling_color));
+				&game->header.hdr_c, &game->color.ceiling));
 	else
 		return (print_err("Unknown header identifier"));
 }
@@ -64,6 +64,7 @@ int	parse_color_line(char *line, int *color_out)
 	ft_free_strs(tokens);
 	return (1);
 }
+/* ft lines: 18 */
 
 /*	checks that tokens contains exactly three numeric strings;
 	converts each token to an integer and verifies they are between 0 and 255;
@@ -84,8 +85,8 @@ int	validate_color_tokens(char **tokens, int *red, int *green, int *blue)
 	*red = ft_atoi(tokens[0]);
 	*green = ft_atoi(tokens[1]);
 	*blue = ft_atoi(tokens[2]);
-	if (*red < 0 || *red > 255 || *green < 0 || *green > 255 ||
-		*blue < 0 || *blue > 255)
+	if (*red < 0 || *red > 255 || *green < 0 || *green > 255
+		|| *blue < 0 || *blue > 255)
 	{
 		ft_free_strs(tokens);
 		return (print_err("Color line: values must be between 0 and 255"));

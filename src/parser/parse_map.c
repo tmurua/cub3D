@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 11:16:37 by tmurua            #+#    #+#             */
-/*   Updated: 2025/03/25 19:54:06 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/03/26 16:38:42 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,20 @@ int	validate_all_borders(t_game *game)
 {
 	int	i;
 
-	if (validate_row_borders(game->map[0]) == -1 ||
-		validate_row_borders(game->map[game->map_rows - 1]) == -1)
+	if (validate_row_borders(game->mapdata.map[0]) == -1
+		|| validate_row_borders(game->mapdata.map[game->mapdata.rows - 1])
+		== -1)
 		return (print_err("Map layout: top and bottom borders must be walls"));
 	i = 0;
-	while (i < game->map_rows)
+	while (i < game->mapdata.rows)
 	{
-		if (validate_row_borders(game->map[i]) == -1)
+		if (validate_row_borders(game->mapdata.map[i]) == -1)
 			return (print_err("Map layout: side borders must be walls"));
 		i++;
 	}
 	return (1);
 }
-/* ft lines: 13 */
+/* ft lines: 14 */
 
 /*	trims leading and trailing spaces from a map row and checks that first and
 	last characters of the trimmed row are '1'. Returns 1 if valid, else -1 */
@@ -72,9 +73,9 @@ int	validate_allowed_chars(t_game *game)
 	char	*row;
 
 	i = 0;
-	while (i < game->map_rows)
+	while (i < game->mapdata.rows)
 	{
-		row = game->map[i];
+		row = game->mapdata.map[i];
 		j = 0;
 		while (row[j])
 		{
