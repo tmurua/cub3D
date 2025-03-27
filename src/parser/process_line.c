@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 13:50:53 by tmurua            #+#    #+#             */
-/*   Updated: 2025/03/27 16:37:08 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/03/27 16:45:21 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ int	process_line(char *input_line, t_game *game)
 	free(trimmed_line);
 	return (1);
 }
-
 
 /*	returns 1 if trimmed line begins with valid header identifier, else 0 */
 int	is_header_line(char *line)
