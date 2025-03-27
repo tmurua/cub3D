@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 13:50:53 by tmurua            #+#    #+#             */
-/*   Updated: 2025/03/26 17:42:27 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/03/27 16:37:08 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,22 @@ int	process_line(char *input_line, t_game *game)
 		return (free_and_return(trimmed_line, 1));
 	if (is_header_line(trimmed_line))
 	{
+		if (game->mapdata.map_started)
+			return (free_and_return(trimmed_line,
+					print_err("Header found after map content")));
 		if (parse_header_line(trimmed_line, game) == -1)
 			return (free_and_return(trimmed_line, -1));
 	}
-	else if (process_map_line(trimmed_line, game) == -1)
-		return (free_and_return(trimmed_line, -1));
+	else
+	{
+		game->mapdata.map_started = 1;
+		if (process_map_line(trimmed_line, game) == -1)
+			return (free_and_return(trimmed_line, -1));
+	}
 	free(trimmed_line);
 	return (1);
 }
+
 
 /*	returns 1 if trimmed line begins with valid header identifier, else 0 */
 int	is_header_line(char *line)

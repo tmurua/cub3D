@@ -3,7 +3,7 @@
 
 - [ ] **0. Memory Management**
    - [ ] Ensure proper allocation and deallocation of memory to avoid leaks.
-- [ ] **1. Map Parsing & Validation**
+- [x] **1. Map Parsing & Validation**
   - [x] Parse the scene file (`*.cub`) to extract textures, floor/ceiling colors, and the 2D map.
   - [x] Validate the map ensuring it is closed (surrounded by walls) and follows the proper format (allowed characters: `0`, `1`, `N`, `S`, `E`, `W`, and spaces).
   - [x] Handle errors (e.g., invalid file format, missing elements) gracefully.
@@ -19,7 +19,7 @@ Example:
     111111
     ```
   - [x] Except for the map content, each type of element can be separated by one or more empty lines.
-  - [ ] Except for the map content which always has to be the last, each type of element can be set in any order in the file.
+  - [x] Except for the map content which always has to be the last, each type of element can be set in any order in the file.
   - [x] Except for the map, each type of information from an element can be separated by one or more spaces.
   - [x] The map must be parsed as it looks in the file. Spaces are a valid part of the map and are up to you to handle. You must be able to parse any kind of map,as long as it respects the rules of the map.
   - [x] Except for the map, each element must begin with its type identifier (composed by one or two characters), followed by its specific information in a strict order:

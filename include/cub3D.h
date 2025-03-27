@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 13:08:51 by tmurua            #+#    #+#             */
-/*   Updated: 2025/03/27 15:42:02 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/03/27 16:41:14 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,13 @@ typedef struct s_color
 	int			ceiling;
 }				t_color;
 
-/* an array of strings and its dimensions */
+/* an array of strings, its dimensions, and flag to check if map's started */
 typedef struct s_mapdata
 {
 	char		**map;
 	int			rows;
 	int			cols;
+	int			map_started;
 }				t_mapdata;
 
 /* header flags indicating if each header has been parsed */
