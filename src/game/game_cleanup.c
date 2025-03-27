@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 10:52:03 by tmurua            #+#    #+#             */
-/*   Updated: 2025/03/26 16:40:40 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/03/27 15:40:57 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,3 @@ void	clean_game(t_game *game)
 		free(game->mapdata.map);
 	}
 }
-/* ft lines: 20 */

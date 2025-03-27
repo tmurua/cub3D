@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 13:55:47 by tmurua            #+#    #+#             */
-/*   Updated: 2025/03/27 12:56:47 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/03/27 15:39:28 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,29 +41,46 @@ int	parse_cub_file(t_game *game, char *filename)
 	return (1);
 }
 
-/*	read every line from file, trim whitespace from each line, update flag
-	if a non‑empty line is encountered, and then process each line */
+/*	processes each line from file via process_single_file_line(),
+	updates found_non_empty, and frees the leftover when done */
 int	process_file_lines(int fd, t_game *game, int *found_non_empty)
 {
 	char	*input_line;
-	char	*trimmed_line;
+	char	*leftover;
 	int		result;
 
-	input_line = get_next_line(fd);
+	leftover = NULL;
+	input_line = get_next_line(fd, &leftover);
 	while (input_line != NULL)
 	{
-		trimmed_line = ft_strtrim(input_line, " \n\r\t");
-		free(input_line);
-		if (trimmed_line)
+		result = process_single_file_line(input_line, game, found_non_empty);
+		if (result == -1)
 		{
-			if (trimmed_line[0] != '\0')
-				*found_non_empty = 1;
-			result = process_line(trimmed_line, game);
-			free(trimmed_line);
-			if (result == -1)
-				return (-1);
+			free(leftover);
+			return (-1);
 		}
-		input_line = get_next_line(fd);
+		input_line = get_next_line(fd, &leftover);
+	}
+	free(leftover);
+	return (1);
+}
+
+/*	trims a line, updates found_non_empty flag if line is non‑empty, calls
+	process_line() on trimmed line, frees its memory, and returns result */
+int	process_single_file_line(char *line, t_game *game, int *found_non_empty)
+{
+	char	*trim_line;
+	int		res;
+
+	trim_line = ft_strtrim(line, " \n\r\t");
+	free(line);
+	if (trim_line)
+	{
+		if (trim_line[0] != '\0')
+			*found_non_empty = 1;
+		res = process_line(trim_line, game);
+		free(trim_line);
+		return (res);
 	}
 	return (1);
 }

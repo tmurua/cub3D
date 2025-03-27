@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 13:08:51 by tmurua            #+#    #+#             */
-/*   Updated: 2025/03/26 17:31:12 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/03/27 15:42:02 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,8 @@ int				free_and_return(char *ptr, int ret);
 /* parser/parse_cub_file.c */
 int				parse_cub_file(t_game *game, char *filename);
 int				process_file_lines(int fd, t_game *game, int *found_non_empty);
+int				process_single_file_line(char *line, t_game *game,
+					int *found_non_empty);
 int				open_cub_file(char *filename);
 int				has_cub_extension(char *filename);
 
@@ -111,9 +113,10 @@ int				is_header_line(char *line);
 int				process_map_line(char *line, t_game *game);
 
 /* parser/get_next_line.c */
-char			*get_next_line(int fd);
-char			*read_concatenate_line(int fd, char *left_c, char *buffer);
-char			*set_leftover_chars(char *current_line);
+char			*get_next_line(int fd, char **leftover);
+char			*read_until_newline(int fd, char *init_str);
+char			*append_until_newline(int fd, char *line);
+char			*process_leftover(char *line, char **leftover);
 
 /* parser/parse_header.c */
 int				parse_header_line(char *line, t_game *game);
