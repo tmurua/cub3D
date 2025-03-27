@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 11:16:37 by tmurua            #+#    #+#             */
-/*   Updated: 2025/03/26 17:29:15 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/03/27 11:45:07 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 /* validates map layout stored in game->map; checks allowed chars and borders */
 int	validate_map_layout(t_game *game)
 {
+	if (game->mapdata.rows <= 0)
+		return (print_err("No map provided"));
 	if (validate_all_borders(game) == -1)
 		return (-1);
 	if (validate_allowed_chars(game) == -1)

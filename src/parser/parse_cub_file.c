@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 13:55:47 by tmurua            #+#    #+#             */
-/*   Updated: 2025/03/26 17:31:12 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/03/27 12:56:47 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ int	parse_cub_file(t_game *game, char *filename)
 		return (-1);
 	if (!found_non_empty)
 		return (print_err("File is empty"));
+	if (!game->header.hdr_no || !game->header.hdr_so
+		|| !game->header.hdr_we || !game->header.hdr_ea
+		|| !game->header.hdr_f || !game->header.hdr_c)
+		return (print_err("Missing required header(s)"));
 	if (validate_map_layout(game) == -1)
 		return (-1);
 	if (validate_map_requirements(game) == -1)
