@@ -88,8 +88,8 @@ void textures(t_data *data)
 {
 	printf("entered textures/n");
 	allocate_all_textures(data, 64, 64);
-	load_texture(data, 0, "textures/greystone.xpm");
-	load_texture(data, 1, "textures/mossy.xpm");
-	load_texture(data, 2, "textures/purplestone.xpm");
-	load_texture(data, 3, "textures/redbrick.xpm");
+	load_texture(data, 0, "./greystone.xpm");
+	load_texture(data, 1, "./mossy.xpm");
+	load_texture(data, 2, "./purplestone.xpm");
+	load_texture(data, 3, "./redbrick.xpm");
 }
