@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 15:08:12 by tmurua            #+#    #+#             */
-/*   Updated: 2025/03/26 17:39:04 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/04/01 15:14:03 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ char	**copy_map_padded(t_game *game, int *cols)
 	if (max_len < 0)
 		return (NULL);
 	*cols = max_len;
-	copy = ft_calloc(game->mapdata.rows + 1, sizeof(char *));
+	copy = ft_calloc(game->map.rows + 1, sizeof(char *));
 	if (!copy)
 		return (NULL);
 	i = 0;
-	while (i < game->mapdata.rows)
+	while (i < game->map.rows)
 	{
-		copy[i] = pad_row(game->mapdata.map[i], max_len);
+		copy[i] = pad_row(game->map.lines[i], max_len);
 		if (!copy[i])
 		{
 			while (--i >= 0)
@@ -56,9 +56,9 @@ int	get_max_trimmed_length(t_game *game)
 
 	max = 0;
 	i = 0;
-	while (i < game->mapdata.rows)
+	while (i < game->map.rows)
 	{
-		trim = ft_strtrim(game->mapdata.map[i], " ");
+		trim = ft_strtrim(game->map.lines[i], " ");
 		if (!trim)
 			return (-1);
 		len = ft_strlen(trim);

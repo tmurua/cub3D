@@ -11,11 +11,10 @@ SRC		=	./src/main.c \
 			./src/input/input_handler.c \
 			./src/error/error_utils.c \
 			./src/parser/parse_cub_file.c \
-			./src/parser/get_next_line.c \
 			./src/parser/process_line.c \
-			./src/parser/parse_header.c \
-			./src/parser/parser_utils.c \
-			./src/parser/validate_map_layout.c \
+			./src/parser/get_next_line.c \
+			./src/parser/parse_texture.c \
+			./src/parser/parse_color.c \
 			./src/parser/validate_map_requirements.c \
 			./src/parser/flood_fill_algorithm.c \
 			./src/parser/map_padding.c \

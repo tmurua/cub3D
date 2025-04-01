@@ -6,82 +6,35 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 13:55:47 by tmurua            #+#    #+#             */
-/*   Updated: 2025/03/27 15:39:28 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/04/01 20:19:28 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
-/*	opens .cub file, checks if it's empty, processes every line, and validates
-	basic map layout & advanced validations (player pos and flood fill enclos)*/
+/*	opens .cub file, processes every line, checks if it's empty, if all headers
+	exist and all map requirements, valid chars, nbr of players and enclosure */
 int	parse_cub_file(t_game *game, char *filename)
 {
 	int	fd;
 	int	found_non_empty;
-	int	result;
+	int	line_processing_status;
 
 	found_non_empty = 0;
 	fd = open_cub_file(filename);
 	if (fd < 0)
 		return (-1);
-	result = process_file_lines(fd, game, &found_non_empty);
+	line_processing_status = handle_lines_loop(fd, game, &found_non_empty);
 	close(fd);
-	if (result == -1)
+	if (line_processing_status == -1)
 		return (-1);
 	if (!found_non_empty)
 		return (print_err("File is empty"));
-	if (!game->header.hdr_no || !game->header.hdr_so
-		|| !game->header.hdr_we || !game->header.hdr_ea
-		|| !game->header.hdr_f || !game->header.hdr_c)
+	if (!game->header.no || !game->header.so || !game->header.we
+		|| !game->header.ea || !game->header.f || !game->header.c)
 		return (print_err("Missing required header(s)"));
-	if (validate_map_layout(game) == -1)
-		return (-1);
 	if (validate_map_requirements(game) == -1)
 		return (-1);
-	return (1);
-}
-
-/*	processes each line from file via process_single_file_line(),
-	updates found_non_empty, and frees the leftover when done */
-int	process_file_lines(int fd, t_game *game, int *found_non_empty)
-{
-	char	*input_line;
-	char	*leftover;
-	int		result;
-
-	leftover = NULL;
-	input_line = get_next_line(fd, &leftover);
-	while (input_line != NULL)
-	{
-		result = process_single_file_line(input_line, game, found_non_empty);
-		if (result == -1)
-		{
-			free(leftover);
-			return (-1);
-		}
-		input_line = get_next_line(fd, &leftover);
-	}
-	free(leftover);
-	return (1);
-}
-
-/*	trims a line, updates found_non_empty flag if line is non‑empty, calls
-	process_line() on trimmed line, frees its memory, and returns result */
-int	process_single_file_line(char *line, t_game *game, int *found_non_empty)
-{
-	char	*trim_line;
-	int		res;
-
-	trim_line = ft_strtrim(line, " \n\r\t");
-	free(line);
-	if (trim_line)
-	{
-		if (trim_line[0] != '\0')
-			*found_non_empty = 1;
-		res = process_line(trim_line, game);
-		free(trim_line);
-		return (res);
-	}
 	return (1);
 }
 
@@ -110,4 +63,49 @@ int	has_cub_extension(char *filename)
 		return (1);
 	else
 		return (-1);
+}
+
+/*	processes each line from file via process_single_file_line(),
+	updates found_non_empty, and frees the leftover when done */
+int	handle_lines_loop(int fd, t_game *game, int *found_non_empty)
+{
+	char	*input_line;
+	char	*leftover;
+	int		line_processing_status;
+
+	leftover = NULL;
+	input_line = get_next_line(fd, &leftover);
+	while (input_line != NULL)
+	{
+		line_processing_status = process_single_file_line(input_line, game,
+				found_non_empty);
+		if (line_processing_status == -1)
+		{
+			free(leftover);
+			return (-1);
+		}
+		input_line = get_next_line(fd, &leftover);
+	}
+	free(leftover);
+	return (1);
+}
+
+/*	trims line, updates flag if line is non‑empty, calls check_line_type() on
+	trim_line, returns processing status or success if no line to be processed*/
+int	process_single_file_line(char *line, t_game *game, int *found_non_empty)
+{
+	char	*trim_line;
+	int		line_processing_status;
+
+	trim_line = ft_strtrim(line, " \n\r\t");
+	free(line);
+	if (trim_line)
+	{
+		if (trim_line[0] != '\0')
+			*found_non_empty = 1;
+		line_processing_status = check_line_type(trim_line, game);
+		free(trim_line);
+		return (line_processing_status);
+	}
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 10:52:03 by tmurua            #+#    #+#             */
-/*   Updated: 2025/03/27 15:40:57 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/04/01 15:14:03 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ void	clean_game(t_game *game)
 		free(game->texture.we);
 	if (game->texture.ea)
 		free(game->texture.ea);
-	if (game->mapdata.map)
+	if (game->map.lines)
 	{
 		i = 0;
-		while (game->mapdata.map[i])
+		while (game->map.lines[i])
 		{
-			free(game->mapdata.map[i]);
+			free(game->map.lines[i]);
 			i++;
 		}
-		free(game->mapdata.map);
+		free(game->map.lines);
 	}
 }
