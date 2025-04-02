@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 13:08:51 by tmurua            #+#    #+#             */
-/*   Updated: 2025/04/01 20:16:21 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/04/02 16:06:56 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 /* macros */
 /* buffer for get_next_line */
 # define BUFFER_SIZE 20
-
+/* set of allowed chars in game->map.lines */
 # define ALLOWED_MAP_CHARS " 01NSEW"
 
 /* stuctures */
@@ -141,23 +141,22 @@ void			ft_free_strs(char **strs);
 /* parser/validate_map_requirements.c */
 int				validate_map_requirements(t_game *game);
 int				validate_allowed_chars(t_game *game);
-int				is_allowed_map_char(char c);
+int				is_allowed_map_char(char current_char);
 int				validate_player_position(t_game *game);
-int				process_player_in_cell(t_game *game, int row, int col,
-					int *found);
+int				process_player_in_cell(t_game *game, int x, int y, int *found);
 
 /* parser/flood_fill_algorithm.c */
 int				perform_flood_fill(t_game *game);
-int				flood_fill_on_copy(char **map_copy, int rows, int cols,
+int				flood_fill_on_copy(char **map_lines_copy, int rows, int cols,
 					t_map *start);
 int				flood_fill(t_game *game, int r, int c);
 
 /* parser/map_padding.c */
-char			**copy_map_padded(t_game *game, int *cols);
-int				get_max_trimmed_length(t_game *game);
-char			*pad_row(char *row, int max_len);
-void			fill_padded_row(char *padded, char *trim, int max_len);
-void			free_map_copy(char **map_copy, int rows);
+char			**copy_padded_map_lines(t_game *game, int *total_cols);
+int				get_max_row_length(t_game *game);
+char			*pad_row(char *row, int max_row_length);
+void			fill_padded_row(char *padded, char *trim, int max_row_length);
+void			free_map_lines_copy(char **map_lines_copy, int map_rows);
 
 /* game/game_cleanup.c */
 void			clean_game(t_game *game);

@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 11:48:39 by tmurua            #+#    #+#             */
-/*   Updated: 2025/04/01 20:15:10 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/04/02 12:59:07 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,91 +25,90 @@ int	validate_map_requirements(t_game *game)
 	return (1);
 }
 
-/* iterates over every row in game->map and checks if every char is allowed */
+/* iterates over each map line in game->map.lines and validates every char */
 int	validate_allowed_chars(t_game *game)
 {
-	int		i;
-	int		j;
-	char	*row;
+	int		current_row_pos;
+	int		current_char_pos;
+	char	*map_line;
 
-	i = 0;
-	while (i < game->map.rows)
+	current_row_pos = 0;
+	while (current_row_pos < game->map.rows)
 	{
-		row = game->map.lines[i];
-		j = 0;
-		while (row[j])
+		map_line = game->map.lines[current_row_pos];
+		current_char_pos = 0;
+		while (map_line[current_char_pos])
 		{
-			if (!is_allowed_map_char(row[j]))
+			if (!is_allowed_map_char(map_line[current_char_pos]))
 				return (print_err("Map layout: invalid character found"));
-			j++;
+			current_char_pos++;
 		}
-		i++;
+		current_row_pos++;
 	}
 	return (1);
 }
 
-/* returns 1 if the character c is in the allowed set, 0 otherwise */
-int	is_allowed_map_char(char c)
+/* returns 1 if current_char is in the allowed_chars set, 0 otherwise */
+int	is_allowed_map_char(char current_char)
 {
-	int		j;
-	char	*allowed;
+	int		i;
+	char	*allowed_chars;
 
-	allowed = ALLOWED_MAP_CHARS;
-	j = 0;
-	while (allowed[j])
+	allowed_chars = ALLOWED_MAP_CHARS;
+	i = 0;
+	while (allowed_chars[i])
 	{
-		if (c == allowed[j])
+		if (current_char == allowed_chars[i])
 			return (1);
-		j++;
+		i++;
 	}
 	return (0);
 }
 
-/*	scans game->map.lines for start pos indicated by 'N', 'S', 'E', or 'W';
-	ensures exactly one starting position exists; stores the player's centered
-	coords and orientation in game, and replaces the starting cell with '0' */
+/*	loops all elements(y) of all strings(x)(map lines) in game->map.lines;
+	uses a flag(found) to determine if exactly one player exists; */
 int	validate_player_position(t_game *game)
 {
-	int	i;
-	int	j;
+	int	x;
+	int	y;
 	int	found;
 
 	found = 0;
-	i = 0;
-	while (i < game->map.rows)
+	x = 0;
+	while (x < game->map.rows)
 	{
-		j = 0;
-		while (game->map.lines[i][j])
+		y = 0;
+		while (game->map.lines[x][y])
 		{
-			if (process_player_in_cell(game, i, j, &found) == -1)
+			if (process_player_in_cell(game, x, y, &found) == -1)
 				return (-1);
-			j++;
+			y++;
 		}
-		i++;
+		x++;
 	}
 	if (!found)
 		return (print_err("No player position found"));
 	return (1);
 }
 
-/*	checks the cell at (row, col) in game->map.map;
-	if player's start pos is found, verifies that no previous one was found;
-	stores coords and orientation in game, and replaces cell with '0';
+/*	checks current cell at game->map.lines[x][y];
+	if player(N, S, E, W) is found, verifies that no previous one was found;
+	stores coords(x,y) and orientation in game->player, and replaces cell with 0;
 	uses pointer 'found' to track if a starting pos has already been processed;
-	returns 1 on success or -1 if a duplicate player is found */
-int	process_player_in_cell(t_game *game, int row, int col, int *found)
+	returns -1 if a duplicate player is found, otherwise always returns 1 */
+int	process_player_in_cell(t_game *game, int x, int y, int *found)
 {
-	if (game->map.lines[row][col] == 'N' || game->map.lines[row][col] == 'S'
-		|| game->map.lines[row][col] == 'E'
-		|| game->map.lines[row][col] == 'W')
+	if (game->map.lines[x][y] == 'N' || game->map.lines[x][y] == 'S'
+		|| game->map.lines[x][y] == 'E'
+		|| game->map.lines[x][y] == 'W')
 	{
 		if (*found)
 			return (print_err("Multiple player positions found"));
 		*found = 1;
-		game->player.x = col + 0.5;
-		game->player.y = row + 0.5;
-		game->player.orientation = game->map.lines[row][col];
-		game->map.lines[row][col] = '0';
+		game->player.x = x + 0.5;
+		game->player.y = y + 0.5;
+		game->player.orientation = game->map.lines[x][y];
+		game->map.lines[x][y] = '0';
 	}
 	return (1);
 }
