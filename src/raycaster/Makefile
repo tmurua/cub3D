@@ -1,7 +1,7 @@
 NAME = raycaster
 HEADER = raycaster.h
 FLAGS = -Wall -Werror -Wextra -g
-SRC = main.c raycaster.c movement.c textures.c
+SRC = hooks.c raycaster.c movement.c textures.c rendering.c utils.c
 OBJ = $(SRC:.c=.o)
 CC = cc
 LIBFT_DIR = ../../libft

@@ -1,117 +1,120 @@
-#include "raycaster.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycaster.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tsternbe <tsternbe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/01 14:04:52 by tsternbe          #+#    #+#             */
+/*   Updated: 2025/04/01 14:53:38 by tsternbe         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-// returns timestamp of now from Epoch in microseconds
-long long	now()
+#include "cubthreed.h"
+
+int	which_texture(int side, int step_y, int step_x)
 {
-	long long		us;
-	struct timeval	time;
+	int	tex;
 
-	gettimeofday(&time, NULL);
-	us = ((time.tv_sec * 1000000) + time.tv_usec);
-	return (us);
+	if (side == 1)
+	{
+		if (step_y > 0)
+			tex = 0;
+		else
+			tex = 1;
+	}
+	else
+	{
+		if (step_x > 0)
+			tex = 2;
+		else
+			tex = 3;
+	}
+	return (tex);
 }
 
-int	initialize_data(t_data *data)
+int	tex_x(t_data *d, double perp_wall_d)
 {
-	int i;
+	double	wall_x;
+	int		tex_x;
 
-	i = 0;
-	while (i < 6)
-	{
-		data->move[i] = 0;
-		i++;
-	}
-	data->posX = 22;
-	data->posY = 12;
-	data->dirX = -1;
-	data->dirY = 0;
-	data->planeX = 0;
-	data->planeY = 0.66;
-	data->time = now();
-	data->oldTime = data->time;
-	data->mlx = mlx_init();
-	if (data->mlx == NULL)
-	{
-		perror("Failed to initialize mlx");
-		return (1);
-	}
-	data->win = mlx_new_window(data->mlx, screenWidth, screenHeight, "raycaster");
-	if (data->win == NULL)
-	{
-		free(data->win);
-		perror("Failed to open window");
-		return (2);
-	}
-	data->img = mlx_new_image(data->mlx, screenWidth, screenHeight);
-	if (data->img == NULL)
-	{
-		free(data->img);
-		free(data->win);
-		perror("Failed to create image");
-		return (3);
-	}
-	data->addr = mlx_get_data_addr(data->img, &data->bpp, &data->ll, &data->end);
-	data->x_step = data->bpp / 8;
-	return (0);
+	if (d->side == 0)
+		wall_x = d->pos_y + perp_wall_d * d->ray_dir_y;
+	else
+		wall_x = d->pos_x + perp_wall_d * d->ray_dir_x;
+	wall_x -= floor(wall_x);
+	tex_x = (int)(wall_x * (double)texWidth);
+	if (d->side == 0 && d->ray_dir_x > 0)
+		tex_x = texWidth - tex_x - 1;
+	if (d->side == 1 && d->ray_dir_y < 0)
+		tex_x = texWidth - tex_x - 1;
+	return (tex_x);
 }
 
-/* void	initialize_calc(t_data *data)
+void	tex_column_to_img(t_data *d, int line_h, int draw_start, int draw_end)
 {
-	data->cameraX = 0;
-	data->rayDirX = 0;
-	data->rayDirY = 0;
-	data->mapX = 0;
-	data->mapY = 0;
-	data->deltaDistX = 0;
-	data->deltaDistY = 0;
-	data->perpWallDist = 0;
-	data->stepX = 0;
-	data->stepY = 0;
-	data->hit = 0;
-	data->side = 0;
-	data->sideDistX = 0;
-	data->sideDistY = 0;
-	data->lineHeight = 0;
-	data->drawStart = 0;
-	data->drawEnd = 0;
-	data->tex = 0;
-	data->wallX = 0;
-	data->texX = 0;
-	data->step = 0;
-	data->texPos = 0;
-	data->y = 0;
-	data->texY = 0;
-	data->pixelPos = 0;
-} */
+	double	step;
+	double	tex_pos;
+	int		y;
+	int		pixel_pos;
+	int		tex_y;
 
-int	destroy(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	while (i < 4)
+	step = 1.0 * texHeight / line_h;
+	tex_pos = (draw_start - screenHeight / 2 + line_h / 2) * step;
+	y = draw_start;
+	while (y < draw_end)
 	{
-		free_texture(data->texture[i], texHeight);
-		i++;
+		tex_y = (int)tex_pos & (texHeight - 1);
+		tex_pos += step;
+		pixel_pos = y * d->ll + d->x * d->x_step;
+		*(int *)(d->addr + pixel_pos) = d->texture[d->tex][tex_y][d->tex_x];
+		y++;
 	}
-	if (data->img)
-		mlx_destroy_image(data->mlx, data->img);
-	if (data->win)
-		mlx_destroy_window(data->mlx, data->win);
-	if (data->mlx)
-	{
-		mlx_destroy_display(data->mlx);
-		free(data->mlx);
-	}
-	exit(0);
-	return (0);
 }
 
-int rgb_to_int(double r, double g, double b)
+void	calc_tex_column(t_data *d)
 {
-	int color = 0;
-	color |= (int)(b * 255);
-	color |= (int)(g * 255) << 8;
-	color |= (int)(r * 255) << 16;
-	return (color);
+	int		line_h;
+	int		draw_start;
+	int		draw_end;
+	double	perp_wall_d;
+
+	if (d->side == 0)
+		perp_wall_d = (d->side_dist_x - d->delta_dist_x);
+	else
+		perp_wall_d = (d->side_dist_y - d->delta_dist_y);
+	line_h = (int)(screenHeight / perp_wall_d);
+	d->tex = which_texture(d->side, d->step_y, d->step_x);
+	d->tex_x = tex_x(d, perp_wall_d);
+	draw_start = -line_h / 2 + screenHeight / 2;
+	if (draw_start < 0)
+		draw_start = 0;
+	draw_end = line_h / 2 + screenHeight / 2;
+	if (draw_end >= screenHeight)
+		draw_end = screenHeight - 1;
+	tex_column_to_img(d, line_h, draw_start, draw_end);
+}
+
+void	digital_differential_analyzer(t_data *d)
+{
+	int	hit;
+
+	hit = 0;
+	while (hit == 0)
+	{
+		if (d->side_dist_x < d->side_dist_y)
+		{
+			d->side_dist_x += d->delta_dist_x;
+			d->mapX += d->step_x;
+			d->side = 0;
+		}
+		else
+		{
+			d->side_dist_y += d->delta_dist_y;
+			d->mapY += d->step_y;
+			d->side = 1;
+		}
+		if (d->map[d->mapX][d->mapY] > 0)
+			hit = 1;
+	}
 }

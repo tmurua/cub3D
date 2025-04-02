@@ -1,25 +1,37 @@
-#include "raycaster.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   textures.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tsternbe <tsternbe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/01 14:14:50 by tsternbe          #+#    #+#             */
+/*   Updated: 2025/04/01 14:53:49 by tsternbe         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void free_texture(int **tex, int y)
+#include "cubthreed.h"
+
+void	free_texture(int **texture, int y)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < y)
 	{
-		free(tex[i]);
+		free (texture[i]);
 		i++;
 	}
 }
 
-int **allocate_texture(int width, int height)
+int	**allocate_texture(int width, int height)
 {
-	printf("entered allocate_textures/n");
 	int	i;
+	int	**array;
 
-	int **array = malloc(height * sizeof(int *));
+	array = malloc(height * sizeof(int *));
 	if (!array)
-		return(NULL);
+		return (NULL);
 	i = 0;
 	while (i < height)
 	{
@@ -36,16 +48,15 @@ int **allocate_texture(int width, int height)
 	return (array);
 }
 
-void allocate_all_textures(t_data *data, int tex_width, int tex_height)
+void	allocate_all_textures(t_data *d, int tex_width, int tex_height)
 {
-	printf("entered allocate_all_textures/n");
 	int	i;
 
 	i = 0;
 	while (i < 4)
 	{
-		data->texture[i] = allocate_texture(tex_width, tex_height);
-		if (!data->texture[i])
+		d->texture[i] = allocate_texture(tex_width, tex_height);
+		if (!d->texture[i])
 		{
 			perror("Failed to allocate texture");
 			exit(1);
@@ -54,15 +65,14 @@ void allocate_all_textures(t_data *data, int tex_width, int tex_height)
 	}
 }
 
-void load_texture(t_data *data, int index, char *file)
+void	load_texture(t_data *d, int index, char *file)
 {
-	printf("entered load_textures/n");
 	int		x;
 	int		y;
 	int		pixel_index;
 	t_img	img;
 
-	img.ptr = mlx_xpm_file_to_image(data->mlx, file, &img.w, &img.h);
+	img.ptr = mlx_xpm_file_to_image(d->mlx, file, &img.w, &img.h);
 	if (!img.ptr)
 	{
 		perror("Failed to load texture from file");
@@ -76,20 +86,19 @@ void load_texture(t_data *data, int index, char *file)
 		while (x < img.w)
 		{
 			pixel_index = y * img.ll + x * (img.bpp / 8);
-			data->texture[index][y][x] = *(int *)(img.addr + pixel_index);
+			d->texture[index][y][x] = *(int *)(img.addr + pixel_index);
 			x++;
 		}
 		y++;
 	}
-	mlx_destroy_image(data->mlx, img.ptr);
+	mlx_destroy_image(d->mlx, img.ptr);
 }
 
-void textures(t_data *data)
+void	textures(t_data *d)
 {
-	printf("entered textures/n");
-	allocate_all_textures(data, 64, 64);
-	load_texture(data, 0, "./greystone.xpm");
-	load_texture(data, 1, "./mossy.xpm");
-	load_texture(data, 2, "./purplestone.xpm");
-	load_texture(data, 3, "./redbrick.xpm");
+	allocate_all_textures(d, 64, 64);
+	load_texture(d, 0, "textures/greystone.xpm");
+	load_texture(d, 1, "textures/mossy.xpm");
+	load_texture(d, 2, "textures/colorstone.xpm");
+	load_texture(d, 3, "textures/redbrick.xpm");
 }

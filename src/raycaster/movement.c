@@ -1,55 +1,77 @@
-#include "raycaster.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   movement.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tsternbe <tsternbe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/01 14:01:35 by tsternbe          #+#    #+#             */
+/*   Updated: 2025/04/01 14:53:32 by tsternbe         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int	handle_input(t_data *data)
+#include "cubthreed.h"
+
+int	handle_input(t_data *d)
 {
-	if (data->move[0]) // Up)
-		move(data, 1);
-	if (data->move[1]) // Down)
-		move(data, -1);
-	if (data->move[3]) // a)
-		strafe(data, -1);
-	if (data->move[2]) // d)
-		strafe(data, 1);
-	if (data->move[5]) // Left)
-		pivot(data, 1);
-	if (data->move[4]) // Right)
-		pivot(data, -1);
+	if (d->move[0])
+		move(d, 1);
+	if (d->move[1])
+		move(d, -1);
+	if (d->move[3])
+		strafe(d, -1);
+	if (d->move[2])
+		strafe(d, 1);
+	if (d->move[5])
+		pivot(d, 1);
+	if (d->move[4])
+		pivot(d, -1);
 	return (0);
 }
 
-void move(t_data *data, int dir)
+void	move(t_data *d, int dir)
 {
-	double mSpeed;
+	double	m_speed;
 
-	mSpeed = data->frameTime * 5.0;
-	if(data->map[(int)(data->posY + data->dirY * mSpeed * dir)][(int)data->posX] == 0)
-		data->posY += data->dirY * mSpeed * dir;
-	if(data->map[(int)data->posY][(int)(data->posX + data->dirX * mSpeed * dir)] == 0)
-		data->posX += data->dirX * mSpeed * dir;
+	m_speed = d->frame_time * 5.0;
+	if (dir == 1)
+	{
+		if (d->map[(int)(d->pos_x + d->dir_x * m_speed)][(int)d->pos_y] == 0)
+			d->pos_x += d->dir_x * m_speed;
+		if (d->map[(int)d->pos_x][(int)(d->pos_y + d->dir_y * m_speed)] == 0)
+			d->pos_y += d->dir_y * m_speed;
+	}
+	else
+	{
+		if (d->map[(int)(d->pos_x - d->dir_x * m_speed)][(int)d->pos_y] == 0)
+			d->pos_x -= d->dir_x * m_speed;
+		if (d->map[(int)d->pos_x][(int)(d->pos_y - d->dir_y * m_speed)] == 0)
+			d->pos_y -= d->dir_y * m_speed;
+	}
 }
 
-void strafe(t_data *data, int dir)
+void	strafe(t_data *d, int dir)
 {
-	double mSpeed;
+	double	m_speed;
 
-	mSpeed = data->frameTime * 5.0;
-	if(data->map[(int)(data->posX + data->planeX * mSpeed * dir)][(int)data->posY] == 0)
-		data->posX += data->planeX * mSpeed * dir;
-	if(data->map[(int)data->posX][(int)(data->posY + data->planeY * mSpeed * dir)] == 0)
-		data->posY += data->planeY * mSpeed * dir;
+	m_speed = d->frame_time * 4.0;
+	if (d->map[(int)(d->pos_x + d->plane_x * m_speed * dir)][(int)d->pos_y] == 0)
+		d->pos_x += d->plane_x * m_speed * dir;
+	if (d->map[(int)d->pos_x][(int)(d->pos_y + d->plane_y * m_speed * dir)] == 0)
+		d->pos_y += d->plane_y * m_speed * dir;
 }
 
-void pivot(t_data *data, int pivot)
+void	pivot(t_data *d, int pivot)
 {
-	double rSpeed;
-	double oldDirX;
-	double oldPlaneX;
+	double	r_speed;
+	double	old_dir_x;
+	double	old_plane_x;
 
-	rSpeed = data->frameTime * 3.0 * pivot;
-	oldDirX = data->dirX;
-	data->dirX = data->dirX * cos(rSpeed) - data->dirY * sin(rSpeed);
-	data->dirY = oldDirX * sin(rSpeed) + data->dirY * cos(rSpeed);
-	oldPlaneX = data->planeX;
-	data->planeX = data->planeX * cos(rSpeed) - data->planeY * sin(rSpeed);
-	data->planeY = oldPlaneX * sin(rSpeed) + data->planeY * cos(rSpeed);
+	r_speed = d->frame_time * 2.0 * pivot;
+	old_dir_x = d->dir_x;
+	d->dir_x = d->dir_x * cos(r_speed) - d->dir_y * sin(r_speed);
+	d->dir_y = old_dir_x * sin(r_speed) + d->dir_y * cos(r_speed);
+	old_plane_x = d->plane_x;
+	d->plane_x = d->plane_x * cos(r_speed) - d->plane_y * sin(r_speed);
+	d->plane_y = old_plane_x * sin(r_speed) + d->plane_y * cos(r_speed);
 }
