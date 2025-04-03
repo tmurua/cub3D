@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 15:30:34 by tmurua            #+#    #+#             */
-/*   Updated: 2025/04/03 21:06:18 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/04/03 21:20:46 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 # define CUBTHREED_H
 # define mapWidth 24
 # define mapHeight 24
-# define screenWidth 1400
-# define screenHeight 700
-# define texWidth 64
-# define texHeight 64
+# define SCREENWIDTH 1400
+# define SCREENHEIGHT 700
+# define TEXWIDTH 64
+# define TEXHEIGHT 64
 # define MINDIST 0.1;
 # define FORWARDS 0;
 # define BACKWARDS 1;
@@ -29,8 +29,6 @@
 # define SOUTH 8388736
 # define EAST 16744448
 # define WEST 16711680
-# define SKY 8421631
-# define FLOOR 0
 # include "cub3D.h"
 # include <X11/X.h>
 # include <X11/keysym.h>
@@ -87,8 +85,8 @@ typedef struct s_data
 	double		side_dist_y;
 	int			step_x;
 	int			step_y;
-	int			mapX;
-	int			mapY;
+	int			map_x;
+	int			map_y;
 	int			radio_car;
 	int			mouse_x;
 	double		mouse_offset;

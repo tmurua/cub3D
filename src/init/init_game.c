@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 15:27:03 by tmurua            #+#    #+#             */
-/*   Updated: 2025/04/03 21:05:54 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/04/03 21:18:34 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ int	initialize_data(t_data *d, t_game *game)
 	d->time = now();
 	d->old_time = d->time;
 	d->running_speed = 0;
-	d->screen_center = screenWidth / 2.0;
-	d->mouse_x = screenWidth / 2;
+	d->screen_center = SCREENWIDTH / 2.0;
+	d->mouse_x = SCREENWIDTH / 2;
 	d->radio_car = 0;
 	return (0);
 }

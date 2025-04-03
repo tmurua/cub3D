@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 14:11:44 by tsternbe          #+#    #+#             */
-/*   Updated: 2025/04/03 21:02:56 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/04/03 21:20:46 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 void	draw_walls(t_data *d)
 {
 	d->x = 0;
-	while (d->x < screenWidth)
+	while (d->x < SCREENWIDTH)
 	{
-		d->ray_dir_x = d->dir_x + d->plane_x * (2 * d->x / (double)screenWidth
+		d->ray_dir_x = d->dir_x + d->plane_x * (2 * d->x / (double)SCREENWIDTH
 				- 1);
-		d->ray_dir_y = d->dir_y + d->plane_y * (2 * d->x / (double)screenWidth
+		d->ray_dir_y = d->dir_y + d->plane_y * (2 * d->x / (double)SCREENWIDTH
 				- 1);
-		d->mapX = (int)d->pos_x;
-		d->mapY = (int)d->pos_y;
+		d->map_x = (int)d->pos_x;
+		d->map_y = (int)d->pos_y;
 		if (d->ray_dir_x == 0)
 			d->delta_dist_x = 1e30;
 		else
@@ -44,22 +44,22 @@ void	calc_step_and_sidedist(t_data *d)
 	if (d->ray_dir_x < 0)
 	{
 		d->step_x = -1;
-		d->side_dist_x = (d->pos_x - d->mapX) * d->delta_dist_x;
+		d->side_dist_x = (d->pos_x - d->map_x) * d->delta_dist_x;
 	}
 	else
 	{
 		d->step_x = 1;
-		d->side_dist_x = (d->mapX + 1.0 - d->pos_x) * d->delta_dist_x;
+		d->side_dist_x = (d->map_x + 1.0 - d->pos_x) * d->delta_dist_x;
 	}
 	if (d->ray_dir_y < 0)
 	{
 		d->step_y = -1;
-		d->side_dist_y = (d->pos_y - d->mapY) * d->delta_dist_y;
+		d->side_dist_y = (d->pos_y - d->map_y) * d->delta_dist_y;
 	}
 	else
 	{
 		d->step_y = 1;
-		d->side_dist_y = (d->mapY + 1.0 - d->pos_y) * d->delta_dist_y;
+		d->side_dist_y = (d->map_y + 1.0 - d->pos_y) * d->delta_dist_y;
 	}
 }
 
@@ -71,14 +71,14 @@ void	draw_sky_and_floor(t_data *d)
 	int	pixel_pos;
 
 	y = 0;
-	while (y < screenHeight)
+	while (y < SCREENHEIGHT)
 	{
-		if (y < screenHeight / 2)
+		if (y < SCREENHEIGHT / 2)
 			color = d->g.color.floor;
 		else
 			color = d->g.color.ceiling;
 		x = 0;
-		while (x < screenWidth)
+		while (x < SCREENWIDTH)
 		{
 			pixel_pos = y * d->ll + x * d->x_step;
 			*(int *)(d->addr + pixel_pos) = color;

@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 14:24:07 by tsternbe          #+#    #+#             */
-/*   Updated: 2025/04/03 19:26:11 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/04/03 21:19:15 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ long long	now(void)
 	return (us);
 }
 
-
 int	initialize_img(t_data *d)
 {
 	d->mlx = mlx_init();
@@ -33,14 +32,14 @@ int	initialize_img(t_data *d)
 		perror("Failed to initialize mlx");
 		return (1);
 	}
-	d->win = mlx_new_window(d->mlx, screenWidth, screenHeight, "raycaster");
+	d->win = mlx_new_window(d->mlx, SCREENWIDTH, SCREENHEIGHT, "raycaster");
 	if (d->win == NULL)
 	{
 		free(d->win);
 		perror("Failed to open window");
 		return (2);
 	}
-	d->img = mlx_new_image(d->mlx, screenWidth, screenHeight);
+	d->img = mlx_new_image(d->mlx, SCREENWIDTH, SCREENHEIGHT);
 	if (d->img == NULL)
 	{
 		free(d->img);
@@ -60,7 +59,7 @@ int	destroy(t_data *d)
 	i = 0;
 	while (i < 4)
 	{
-		free_texture(d->texture[i], texHeight);
+		free_texture(d->texture[i], TEXHEIGHT);
 		i++;
 	}
 	if (d->img)

@@ -6,25 +6,23 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 14:14:17 by tmurua            #+#    #+#             */
-/*   Updated: 2025/04/03 15:33:10 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/04/03 21:16:04 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cubthreed.h"
 #include "../../include/cub3D.h"
 
-int handle_mouse_scroll(int button, int x, int y, t_data *d)
+int	handle_mouse_scroll(int button, int x, int y, t_data *d)
 {
 	(void)x;
 	(void)y;
-	if (button == 4) // Scroll up
+	if (button == 4)
 		d->running_speed += 0.1;
-	else if (button == 5) // Scroll down
+	else if (button == 5)
 		d->running_speed -= 0.1;
-
 	if (d->running_speed < 0.1)
-		d->running_speed = 0.0; // Prevent negative or zero speed
-
+		d->running_speed = 0.0;
 	return (0);
 }
 
