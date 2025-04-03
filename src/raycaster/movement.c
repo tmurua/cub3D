@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsternbe <tsternbe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 14:01:35 by tsternbe          #+#    #+#             */
-/*   Updated: 2025/04/01 14:53:32 by tsternbe         ###   ########.fr       */
+/*   Updated: 2025/04/03 15:32:24 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cubthreed.h"
+#include "../../include/cubthreed.h"
+#include "../../include/cub3D.h"
 
 int	handle_input(t_data *d)
 {
@@ -33,7 +34,7 @@ void	move(t_data *d, int dir)
 {
 	double	m_speed;
 
-	m_speed = d->frame_time * 5.0;
+	m_speed = d->frame_time * 4.0;
 	if (dir == 1)
 	{
 		if (d->map[(int)(d->pos_x + d->dir_x * m_speed)][(int)d->pos_y] == 0)

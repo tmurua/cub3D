@@ -1,6 +1,7 @@
-# Parsing Module TODO Checklist
+# TODO Checklist
+## Parser Module
 
-1. **Command-Line & File I/O Validation**
+###  1. **Command-Line & File I/O Validation**
    1.1. **Validate Command-Line Arguments**
        - [x] Ensure exactly 2 arguments are provided.
        - [x] Print a usage message if the argument count is incorrect.
@@ -15,7 +16,7 @@
        - [x] Read the first non-empty (trimmed) line.
        - [x] If no non-empty line is found, call `print_err("File is empty")` and return -1.
 
-2. **Header Parsing (Textures & Colors)**
+### 2. **Header Parsing (Textures & Colors)**
    2.1. **Define Valid Header Identifiers**
        - [x] Confirm allowed identifiers: `"NO "`, `"SO "`, `"WE "`, `"EA "`, `"F "`, `"C "`.
    2.2. **Header Line Check**
@@ -36,7 +37,7 @@
        - [x] After processing header lines, verify that all required headers (4 textures and 2 colors) are present.
        - [x] Report an error if any header is missing.
 
-3. **Map Layout Parsing**
+### 3. **Map Layout Parsing**
    3.1. **Collect Map Lines**
        - [x] In the main parsing loop, detect when header processing is complete.
        - [x] Set a flag (e.g., `found_non_empty`) when transitioning from header lines to map lines.
@@ -45,7 +46,7 @@
        - [x] Ensure each character in every row is one of: `'0'`, `'1'`, `'N'`, `'S'`, `'E'`, `'W'`, or space.
        - [x] Report an error if any invalid character is found.
 
-4. **Advanced Map Validation**
+### 4. **Advanced Map Validation**
    4.1. **Map Enclosure Check (Flood Fill)**
        - [x] Implement a flood-fill algorithm starting from the player’s starting position (or any '0' cell).
        - [x] Ensure the flood-fill does not leak outside the map boundaries.
@@ -57,7 +58,7 @@
        - [x] Check if the map is rectangular.
        - [x] If not, convert the map into a rectangle (using padding) with a helper function.
 
-5. **Error Handling & Memory Management**
+### 5. **Error Handling & Memory Management**
    5.1. **Centralized Error Reporting**
        - [x] Create `error_utils.c` with `print_err()` (returning -1) and `malloc_error()`.
    5.2. **Standardize Return Conventions**
@@ -65,18 +66,43 @@
    5.3. **Memory Cleanup on Error**
        - [x] Ensure that all allocated memory is freed on error (e.g., via a `clean_game()` function).
 
-6. **Integration and Testing**
+### 6. **Integration and Testing**
    6.1. **Unit Testing Individual Functions**
        - [x] Test file extension checking.
        - [x] Test file opening and empty file detection.
        - [x] Test header line parsing (texture and color lines) with valid and invalid inputs.
-       - [ ] Test map layout parsing and character validation.
-       - [ ] Test flood-fill and player position validation.
+       - [x] Test map layout parsing and character validation.
+       - [x] Test flood-fill and player position validation.
    6.2. **Integration Tests**
        - [x] Run the complete parsing flow with known valid `.cub` files.
        - [x] Run the parsing flow with various invalid files (wrong extension, missing headers, invalid map, etc.).
    6.3. **Refactor and Optimize**
-       - [ ] Review and refactor code based on test results and code review.
-       - [ ] Ensure code follows SRP, DRY, and KISS principles throughout.
+       - [x] Review and refactor code based on test results and code review.
+       - [x] Ensure code follows SRP, DRY, and KISS principles throughout.
 
+## Merging Parser and Raycaster Modules
 
+### 1. Raycaster Module Adaptation
+- [ ] Replace hardcoded data with parser-provided values:
+  - [ ] Use texture file paths from `t_game->texture` instead of fixed strings.
+  - [ ] Use parsed map lines from `t_game->map.lines` rather than a static map.
+  - [ ] Update player position and color information from `t_game->player` and `t_game->color`.
+- [ ] Adjust raycaster functions (e.g., texture loading, rendering) to work with the new `t_game` structure.
+
+### 2. Integration
+- [ ] Modify `init_game()` (formerly `main()`) to initialize both the parser and raycaster modules.
+- [ ] Remove any remaining hardcoded initialization in the raycaster module.
+- [ ] Ensure proper error propagation and cleanup across modules.
+
+### 3. Testing & Debugging
+- [ ] Run unit tests on parser functions (file I/O, header parsing, map validation).
+- [ ] Run unit tests on raycaster functions (texture loading, rendering, movement).
+- [ ] Perform integration tests with various valid and invalid `.cub` files.
+- [ ] Use tools like Valgrind to check for memory leaks and errors.
+- [ ] Verify that the game loads correctly and renders the map with correct textures and player data.
+
+### 4. Finalization & Documentation
+- [ ] Update the README with instructions for running the merged project.
+- [ ] Document any changes made to function interfaces and data structures.
+- [ ] Ensure the code adheres to Norminette and Clean Code guidelines.
+- [ ] Prepare for final code review and merging into the main branch.

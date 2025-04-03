@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsternbe <tsternbe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 14:24:07 by tsternbe          #+#    #+#             */
-/*   Updated: 2025/04/01 14:53:54 by tsternbe         ###   ########.fr       */
+/*   Updated: 2025/04/03 17:02:41 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cubthreed.h"
+#include "../../include/cubthreed.h"
+#include "../../include/cub3D.h"
 
-// returns timestamp of now from Epoch in microseconds
+/* returns timestamp of now from Epoch in microseconds */
 long long	now(void)
 {
 	long long		us;
@@ -21,27 +22,6 @@ long long	now(void)
 	gettimeofday(&time, NULL);
 	us = ((time.tv_sec * 1000000) + time.tv_usec);
 	return (us);
-}
-
-int	initialize_data(t_data *d)
-{
-	int	i;
-
-	i = 0;
-	while (i < 6)
-	{
-		d->move[i] = 0;
-		i++;
-	}
-	d->pos_x = 22;
-	d->pos_y = 12;
-	d->dir_x = -1;
-	d->dir_y = 0;
-	d->plane_x = 0;
-	d->plane_y = 0.66;
-	d->time = now();
-	d->old_time = d->time;
-	return (0);
 }
 
 int	initialize_img(t_data *d)

@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsternbe <tsternbe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 14:14:50 by tsternbe          #+#    #+#             */
-/*   Updated: 2025/04/01 14:53:49 by tsternbe         ###   ########.fr       */
+/*   Updated: 2025/04/03 15:31:04 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cubthreed.h"
+#include "../../include/cubthreed.h"
+#include "../../include/cub3D.h"
 
 void	free_texture(int **texture, int y)
 {
@@ -19,7 +20,7 @@ void	free_texture(int **texture, int y)
 	i = 0;
 	while (i < y)
 	{
-		free (texture[i]);
+		free(texture[i]);
 		i++;
 	}
 }
@@ -70,7 +71,7 @@ void	load_texture(t_data *d, int index, char *file)
 	int		x;
 	int		y;
 	int		pixel_index;
-	t_img	img;
+	t_image	img;
 
 	img.ptr = mlx_xpm_file_to_image(d->mlx, file, &img.w, &img.h);
 	if (!img.ptr)
@@ -97,8 +98,8 @@ void	load_texture(t_data *d, int index, char *file)
 void	textures(t_data *d)
 {
 	allocate_all_textures(d, 64, 64);
-	load_texture(d, 0, "textures/greystone.xpm");
-	load_texture(d, 1, "textures/mossy.xpm");
-	load_texture(d, 2, "textures/colorstone.xpm");
-	load_texture(d, 3, "textures/redbrick.xpm");
+	load_texture(d, 0, "textures/wolfenstein/grey_stone.xpm");
+	load_texture(d, 1, "textures/wolfenstein/purple_stone.xpm");
+	load_texture(d, 2, "textures/wolfenstein/red_brick.xpm");
+	load_texture(d, 3, "textures/wolfenstein/wood.xpm");
 }

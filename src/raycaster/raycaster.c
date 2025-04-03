@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsternbe <tsternbe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 14:04:52 by tsternbe          #+#    #+#             */
-/*   Updated: 2025/04/01 14:53:38 by tsternbe         ###   ########.fr       */
+/*   Updated: 2025/04/03 15:32:15 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cubthreed.h"
+#include "../../include/cubthreed.h"
+#include "../../include/cub3D.h"
 
 int	which_texture(int side, int step_y, int step_x)
 {

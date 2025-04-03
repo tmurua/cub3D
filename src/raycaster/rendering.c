@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   rendering.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsternbe <tsternbe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 14:11:44 by tsternbe          #+#    #+#             */
-/*   Updated: 2025/04/01 14:53:44 by tsternbe         ###   ########.fr       */
+/*   Updated: 2025/04/03 15:32:47 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cubthreed.h"
+#include "../../include/cubthreed.h"
+#include "../../include/cub3D.h"
 
 void	draw_walls(t_data *d)
 {
@@ -91,7 +92,13 @@ void	render_image(t_data *d)
 	d->frame_time = (d->time - d->old_time) / 1000000.0;
 	if (d->frame_time > 0.01667)
 		d->frame_time = 0.01667;
-	handle_input(d);
+	if (d->radio_car == 1)
+	{
+		d->mouse_offset = (d->mouse_x - d->screen_center) / d->screen_center;
+		steer_car(d);
+	}
+	else
+		handle_input(d);
 	draw_sky_and_floor(d);
 	draw_walls(d);
 	mlx_put_image_to_window(d->mlx, d->win, d->img, 0, 0);
@@ -100,6 +107,13 @@ void	render_image(t_data *d)
 
 int	render_image_wrapper(void *param)
 {
-	render_image((t_data *)param);
+	t_data *d = (t_data *)param;
+	int	x;
+	int	y;
+
+	mlx_mouse_get_pos(d->mlx, d->win, &x, &y);
+	(void)y;
+	d->mouse_x = x;
+	render_image(d);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 13:08:51 by tmurua            #+#    #+#             */
-/*   Updated: 2025/04/02 16:06:56 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/04/03 15:29:30 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ typedef struct s_game
 /* function prototypes */
 /* input/input_handler.c */
 int				input_validation(int argc, char **argv, t_game *game);
-int				init_game(t_game *game);
 
 /* error/error_utils.c */
 int				print_err(char *str_err);

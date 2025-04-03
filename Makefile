@@ -18,7 +18,16 @@ SRC		=	./src/main.c \
 			./src/parser/validate_map_requirements.c \
 			./src/parser/flood_fill_algorithm.c \
 			./src/parser/map_padding.c \
-			./src/game/game_cleanup.c
+			./src/game/game_cleanup.c \
+			./src/raycaster/hooks.c \
+			./src/raycaster/raycaster.c \
+			./src/raycaster/movement.c \
+			./src/raycaster/textures.c \
+			./src/raycaster/rendering.c \
+			./src/raycaster/utils.c \
+			./src/raycaster/radiocar.c \
+			./src/init/init_game.c \
+			./src/init/init_player.c
 
 OBJ		= $(SRC:.c=.o)
 
