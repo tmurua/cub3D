@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 15:30:34 by tmurua            #+#    #+#             */
-/*   Updated: 2025/04/03 17:06:10 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/04/03 21:06:18 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ typedef struct s_image
 
 typedef struct s_data
 {
-	int map[mapWidth][mapHeight]; //
+	int			map[mapWidth][mapHeight];
 	int			x;
 	double		pos_x;
 	double		pos_y;
@@ -95,6 +95,7 @@ typedef struct s_data
 	double		screen_center;
 	double		player_angle;
 	double		running_speed;
+	t_game		g;
 }				t_data;
 
 // utils.c
@@ -109,7 +110,7 @@ void			strafe(t_data *d, int dir);
 void			pivot(t_data *d, int pivot);
 
 // hooks.c
-void			save_map(t_data *d);
+void			load_parsed_map(t_data *d, t_game *game);
 int				handle_keypress(int keycode, t_data *d);
 int				handle_keyrelease(int keycode, t_data *d);
 
@@ -118,7 +119,7 @@ void			free_texture(int **tex, int y);
 int				**allocate_texture(int width, int height);
 void			allocate_all_textures(t_data *d, int tex_width, int tex_height);
 void			load_texture(t_data *d, int index, char *file);
-void			textures(t_data *d);
+void			textures(t_data *d, t_game *game);
 
 // raycaster.c
 int				which_texture(int side, int step_y, int step_x);
@@ -142,6 +143,7 @@ int				steer_car(t_data *d);
 /* init/init_game.c */
 int				init_game(t_game *game);
 int				initialize_data(t_data *d, t_game *game);
+void			copy_colors(t_data *d, t_game *game);
 
 /* init/init_player.c */
 int				set_initial_orientation(t_data *d, char orientation);

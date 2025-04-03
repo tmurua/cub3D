@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 13:08:51 by tmurua            #+#    #+#             */
-/*   Updated: 2025/04/03 15:29:30 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/04/03 20:06:29 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ int				has_xpm_extension(char *texture_file_path);
 /* parser/parse_color.c */
 int				handle_color_hdr(char *line, int *color_field,
 					int *header_flag);
-int				parse_color_line(char *line, int *color_out);
+int				parse_color_line(char *line, int *color_field);
 int				validate_color_tokens(char **tokens, int *red, int *green,
 					int *blue);
 void			ft_free_strs(char **strs);

@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 13:39:43 by tmurua            #+#    #+#             */
-/*   Updated: 2025/04/01 18:58:22 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/04/03 20:05:18 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	handle_color_hdr(char *line, int *color_field, int *header_flag)
 
 /*	expects a line like "F 155,155,155" or "C 204,229,255"; skips identifier,
 	splits it by commas; checks if there are exactly three numeric parts,
-	and combines them into a single integer in 0xRRGGBB format */
+	and combines them into a single int, color_field, stored in game->color */
 int	parse_color_line(char *line, int *color_field)
 {
 	char	*color_line;

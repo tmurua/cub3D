@@ -6,12 +6,12 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 15:27:03 by tmurua            #+#    #+#             */
-/*   Updated: 2025/04/03 17:03:34 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/04/03 21:05:54 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cubthreed.h"
 #include "../../include/cub3D.h"
+#include "../../include/cubthreed.h"
 
 int	init_game(t_game *game)
 {
@@ -21,14 +21,15 @@ int	init_game(t_game *game)
 		return (-1);
 	if (initialize_img(&d) != 0)
 		return (-1);
-	save_map(&d); //TODO
-	textures(&d); //TODO
-	mlx_hook(d.win, DestroyNotify, StructureNotifyMask, &destroy, &d); //TODO
-	mlx_hook(d.win, KeyPress, KeyPressMask, &handle_keypress, &d); //TODO
-	mlx_hook(d.win, KeyRelease, KeyReleaseMask, &handle_keyrelease, &d); //TODO
-	mlx_hook(d.win, ButtonPress, ButtonPressMask, &handle_mouse_scroll, &d); //TODO
-	mlx_loop_hook(d.mlx, &render_image_wrapper, &d); //TODO
-	mlx_loop(d.mlx); //TODO
+	load_parsed_map(&d, game); // TODO
+	textures(&d, game);
+	copy_colors(&d, game);
+	mlx_hook(d.win, DestroyNotify, StructureNotifyMask, &destroy, &d);
+	mlx_hook(d.win, KeyPress, KeyPressMask, &handle_keypress, &d);
+	mlx_hook(d.win, KeyRelease, KeyReleaseMask, &handle_keyrelease, &d);
+	mlx_hook(d.win, ButtonPress, ButtonPressMask, &handle_mouse_scroll, &d);
+	mlx_loop_hook(d.mlx, &render_image_wrapper, &d);
+	mlx_loop(d.mlx);
 	return (1);
 }
 
@@ -53,4 +54,10 @@ int	initialize_data(t_data *d, t_game *game)
 	d->mouse_x = screenWidth / 2;
 	d->radio_car = 0;
 	return (0);
+}
+
+void	copy_colors(t_data *d, t_game *game)
+{
+	d->g.color.floor = game->color.floor;
+	d->g.color.ceiling = game->color.ceiling;
 }

@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 14:24:07 by tsternbe          #+#    #+#             */
-/*   Updated: 2025/04/03 17:02:41 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/04/03 19:26:11 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ long long	now(void)
 	us = ((time.tv_sec * 1000000) + time.tv_usec);
 	return (us);
 }
+
 
 int	initialize_img(t_data *d)
 {

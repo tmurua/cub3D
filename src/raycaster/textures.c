@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 14:14:50 by tsternbe          #+#    #+#             */
-/*   Updated: 2025/04/03 15:31:04 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/04/03 17:53:10 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,11 +95,11 @@ void	load_texture(t_data *d, int index, char *file)
 	mlx_destroy_image(d->mlx, img.ptr);
 }
 
-void	textures(t_data *d)
+void	textures(t_data *d, t_game *game)
 {
 	allocate_all_textures(d, 64, 64);
-	load_texture(d, 0, "textures/wolfenstein/grey_stone.xpm");
-	load_texture(d, 1, "textures/wolfenstein/purple_stone.xpm");
-	load_texture(d, 2, "textures/wolfenstein/red_brick.xpm");
-	load_texture(d, 3, "textures/wolfenstein/wood.xpm");
+	load_texture(d, 0, game->texture.no);
+	load_texture(d, 1, game->texture.so);
+	load_texture(d, 2, game->texture.we);
+	load_texture(d, 3, game->texture.ea);
 }

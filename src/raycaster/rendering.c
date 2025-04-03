@@ -6,20 +6,22 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 14:11:44 by tsternbe          #+#    #+#             */
-/*   Updated: 2025/04/03 15:32:47 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/04/03 21:02:56 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cubthreed.h"
 #include "../../include/cub3D.h"
+#include "../../include/cubthreed.h"
 
 void	draw_walls(t_data *d)
 {
 	d->x = 0;
 	while (d->x < screenWidth)
 	{
-		d->ray_dir_x = d->dir_x + d->plane_x * (2 * d->x / (double)screenWidth - 1);
-		d->ray_dir_y = d->dir_y + d->plane_y * (2 * d->x / (double)screenWidth - 1);
+		d->ray_dir_x = d->dir_x + d->plane_x * (2 * d->x / (double)screenWidth
+				- 1);
+		d->ray_dir_y = d->dir_y + d->plane_y * (2 * d->x / (double)screenWidth
+				- 1);
 		d->mapX = (int)d->pos_x;
 		d->mapY = (int)d->pos_y;
 		if (d->ray_dir_x == 0)
@@ -72,9 +74,9 @@ void	draw_sky_and_floor(t_data *d)
 	while (y < screenHeight)
 	{
 		if (y < screenHeight / 2)
-			color = SKY;
+			color = d->g.color.floor;
 		else
-			color = FLOOR;
+			color = d->g.color.ceiling;
 		x = 0;
 		while (x < screenWidth)
 		{
@@ -107,10 +109,11 @@ void	render_image(t_data *d)
 
 int	render_image_wrapper(void *param)
 {
-	t_data *d = (t_data *)param;
-	int	x;
-	int	y;
+	t_data	*d;
+	int		x;
+	int		y;
 
+	d = (t_data *)param;
 	mlx_mouse_get_pos(d->mlx, d->win, &x, &y);
 	(void)y;
 	d->mouse_x = x;
