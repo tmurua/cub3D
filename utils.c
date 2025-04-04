@@ -1,0 +1,78 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tsternbe <tsternbe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/01 14:24:07 by tsternbe          #+#    #+#             */
+/*   Updated: 2025/04/04 13:14:45 by tsternbe         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../include/cubthreed.h"
+#include "../../include/cub3D.h"
+
+// Returns timestamp of now from Epoch in microseconds
+long long	now(void)
+{
+	long long		us;
+	struct timeval	time;
+
+	gettimeofday(&time, NULL);
+	us = ((time.tv_sec * 1000000) + time.tv_usec);
+	return (us);
+}
+
+// Initializes mlx functions
+int	initialize_img(t_data *d)
+{
+	d->mlx = mlx_init();
+	if (d->mlx == NULL)
+	{
+		perror("Failed to initialize mlx");
+		return (1);
+	}
+	d->win = mlx_new_window(d->mlx, SCREENWIDTH, SCREENHEIGHT, "cub3D");
+	if (d->win == NULL)
+	{
+		free(d->win);
+		perror("Failed to open window");
+		return (2);
+	}
+	d->img = mlx_new_image(d->mlx, SCREENWIDTH, SCREENHEIGHT);
+	if (d->img == NULL)
+	{
+		free(d->img);
+		free(d->win);
+		perror("Failed to create image");
+		return (3);
+	}
+	d->addr = mlx_get_data_addr(d->img, &d->bpp, &d->ll, &d->end);
+	d->x_step = d->bpp / 8;
+	return (0);
+}
+
+// Destroys and frees mlx functions
+int	destroy(t_data *d)
+{
+	int	i;
+
+	i = 0;
+	while (i < 4)
+	{
+		free_texture(d->texture[i], TEXHEIGHT);
+		i++;
+	}
+	if (d->img)
+		mlx_destroy_image(d->mlx, d->img);
+	if (d->win)
+		mlx_destroy_window(d->mlx, d->win);
+	if (d->mlx)
+	{
+		mlx_destroy_display(d->mlx);
+		free(d->mlx);
+	}
+	exit(0);
+	return (0);
+}
