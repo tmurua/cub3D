@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 15:30:34 by tmurua            #+#    #+#             */
-/*   Updated: 2025/04/13 21:07:30 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/04/13 21:35:33 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,9 +107,6 @@ void			strafe(t_data *d, int dir);
 void			pivot(t_data *d, int pivot);
 
 // hooks.c
-int				get_map_index(t_data *d, int x, int y);
-int				*convert_parsed_map(t_game *game);
-void			load_parsed_map(t_data *d, t_game *game);
 int				handle_keypress(int keycode, t_data *d);
 int				handle_keyrelease(int keycode, t_data *d);
 
@@ -138,6 +135,8 @@ int				render_image_wrapper(void *param);
 // radiocar.c
 int				handle_mouse_scroll(int button, int x, int y, t_data *d);
 int				steer_car(t_data *d);
+void			update_player_position(t_data *d);
+void			update_player_direction(t_data *d);
 
 /* init/init_game.c */
 int				init_game(t_game *game);
@@ -150,5 +149,11 @@ void			set_north(t_data *d);
 void			set_south(t_data *d);
 void			set_east(t_data *d);
 void			set_west(t_data *d);
+
+/* init/init_map.c */
+void			load_parsed_map(t_data *d, t_game *game);
+int				*convert_parsed_map(t_game *game);
+int				convert_map_cell(char c);
+int				get_map_index(t_data *d, int x, int y);
 
 #endif

@@ -27,7 +27,8 @@ SRC		=	./src/main.c \
 			./src/raycaster/utils.c \
 			./src/raycaster/radiocar.c \
 			./src/init/init_game.c \
-			./src/init/init_player.c
+			./src/init/init_player.c \
+			./src/init/init_map.c
 
 OBJ		= $(SRC:.c=.o)
 
