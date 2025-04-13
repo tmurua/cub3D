@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 14:14:17 by tmurua            #+#    #+#             */
-/*   Updated: 2025/04/03 21:16:04 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/04/13 18:50:57 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ int	steer_car(t_data *d)
 	if (d->running_speed > 0.0)
 	{
 		m_speed = d->running_speed * d->frame_time * 4.0;
-		if (d->map[(int)(d->pos_x + d->dir_x * m_speed)][(int)d->pos_y] == 0)
+		if (d->map[get_map_index(d, (int)(d->pos_x + d->dir_x * m_speed), (int)d->pos_y)] == 0)
 			d->pos_x += d->dir_x * m_speed;
-		if (d->map[(int)d->pos_x][(int)(d->pos_y + d->dir_y * m_speed)] == 0)
+		if (d->map[get_map_index(d, (int)d->pos_x, (int)(d->pos_y + d->dir_y * m_speed))] == 0)
 			d->pos_y += d->dir_y * m_speed;
 	}
 	if (d->mouse_offset < -0.1 || d->mouse_offset > 0.1)

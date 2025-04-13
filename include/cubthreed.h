@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 15:30:34 by tmurua            #+#    #+#             */
-/*   Updated: 2025/04/03 21:20:46 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/04/13 18:51:38 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@
 # include <X11/keysym.h>
 # include <fcntl.h>
 # include <math.h>
-# include <mlx.h>
 # include <stddef.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -53,7 +52,10 @@ typedef struct s_image
 
 typedef struct s_data
 {
-	int			map[mapWidth][mapHeight];
+	// int			map[mapWidth][mapHeight];
+	int			*map;
+	int			map_rows;
+	int			map_cols;
 	int			x;
 	double		pos_x;
 	double		pos_y;
@@ -108,6 +110,7 @@ void			strafe(t_data *d, int dir);
 void			pivot(t_data *d, int pivot);
 
 // hooks.c
+int				get_map_index(t_data *d, int x, int y);
 void			load_parsed_map(t_data *d, t_game *game);
 int				handle_keypress(int keycode, t_data *d);
 int				handle_keyrelease(int keycode, t_data *d);

@@ -6,20 +6,31 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 13:55:52 by tsternbe          #+#    #+#             */
-/*   Updated: 2025/04/03 18:20:16 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/04/13 18:49:30 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cubthreed.h"
 #include "../../include/cub3D.h"
 
-/*	copies parsed game->map.lines into raycaster's map array d->map
-	each char '1' is converted to 1 (wall) and any other chars to 0 (floor) */
+/*
+ *  Computes the 1D array index given 2D coordinates (x, y) using
+ *  the number of columns stored in d->map_cols.
+ *
+ *  Returns: the computed index.
+ */
+int	get_map_index(t_data *d, int x, int y)
+{
+	return (x * d->map_cols + y);
+}
+
+
 void	load_parsed_map(t_data *d, t_game *game)
 {
 	(void)game;
-	int worldMap[mapWidth][mapHeight] =
-	{
+	/* Hardcoded worldMap is defined in row-major order.
+	   Original dimensions: mapWidth rows and mapHeight columns */
+	int	worldMap[mapWidth][mapHeight] = {
 		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
 		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
@@ -45,32 +56,31 @@ void	load_parsed_map(t_data *d, t_game *game)
 		{1,0,1,0,1,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 	};
-	for (int x = 0; x < mapWidth; x++)
+
+	d->map_rows = mapWidth;
+	d->map_cols = mapHeight;
+	d->map = malloc(d->map_rows * d->map_cols * sizeof(int));
+	if (!d->map)
 	{
-		for (int y = 0; y < mapHeight; y++)
+		perror("Failed to allocate memory for map");
+		exit(EXIT_FAILURE);
+	}
+	{
+		int x;
+		int y;
+		x = 0;
+		while (x < mapWidth)
 		{
-			d->map[x][y] = worldMap[x][y];
+			y = 0;
+			while (y < mapHeight)
+			{
+				d->map[get_map_index(d, x, y)] = worldMap[x][y];
+				y++;
+			}
+			x++;
 		}
 	}
 }
-// void	load_parsed_map(t_data *d, t_game *game)
-// {
-// 	int	x;
-// 	int	y;
-
-// 	x = 0;
-// 	while (x < game->map.rows)
-// 	{
-// 		y = 0;
-// 		while (y < game->map.cols)
-// 		{
-// 			d->map[x][y] = game->map.lines[x][y];
-// 			y++;
-// 		}
-// 		x++;
-// 	}
-// }
-
 
 int	handle_keypress(int keycode, t_data *d)
 {

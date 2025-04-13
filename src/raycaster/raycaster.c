@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 14:04:52 by tsternbe          #+#    #+#             */
-/*   Updated: 2025/04/03 21:20:46 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/04/13 18:49:59 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,8 @@ void	digital_differential_analyzer(t_data *d)
 			d->map_y += d->step_y;
 			d->side = 1;
 		}
-		if (d->map[d->map_x][d->map_y] > 0)
+		if (d->map[get_map_index(d, d->map_x, d->map_y)] > 0)
 			hit = 1;
 	}
 }
+
