@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 14:01:35 by tsternbe          #+#    #+#             */
-/*   Updated: 2025/04/13 18:50:32 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/04/13 21:09:56 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,20 @@ void	move(t_data *d, int dir)
 	m_speed = d->frame_time * 4.0;
 	if (dir == 1)
 	{
-		if (d->map[get_map_index(d, (int)(d->pos_x + d->dir_x * m_speed), (int)d->pos_y)] == 0)
+		if (d->map[get_map_index(d, (int)(d->pos_x + d->dir_x * m_speed),
+				(int)d->pos_y)] == 0)
 			d->pos_x += d->dir_x * m_speed;
-		if (d->map[get_map_index(d, (int)d->pos_x, (int)(d->pos_y + d->dir_y * m_speed))] == 0)
+		if (d->map[get_map_index(d, (int)d->pos_x, (int)(d->pos_y + d->dir_y
+					* m_speed))] == 0)
 			d->pos_y += d->dir_y * m_speed;
 	}
 	else
 	{
-		if (d->map[get_map_index(d, (int)(d->pos_x - d->dir_x * m_speed), (int)d->pos_y)] == 0)
+		if (d->map[get_map_index(d, (int)(d->pos_x - d->dir_x * m_speed),
+				(int)d->pos_y)] == 0)
 			d->pos_x -= d->dir_x * m_speed;
-		if (d->map[get_map_index(d, (int)d->pos_x, (int)(d->pos_y - d->dir_y * m_speed))] == 0)
+		if (d->map[get_map_index(d, (int)d->pos_x, (int)(d->pos_y - d->dir_y
+					* m_speed))] == 0)
 			d->pos_y -= d->dir_y * m_speed;
 	}
 }
@@ -56,9 +60,11 @@ void	strafe(t_data *d, int dir)
 	double	m_speed;
 
 	m_speed = d->frame_time * 4.0;
-	if (d->map[get_map_index(d, (int)(d->pos_x + d->plane_x * m_speed * dir), (int)d->pos_y)] == 0)
+	if (d->map[get_map_index(d, (int)(d->pos_x + d->plane_x * m_speed * dir),
+			(int)d->pos_y)] == 0)
 		d->pos_x += d->plane_x * m_speed * dir;
-	if (d->map[get_map_index(d, (int)d->pos_x, (int)(d->pos_y + d->plane_y * m_speed * dir))] == 0)
+	if (d->map[get_map_index(d, (int)d->pos_x, (int)(d->pos_y + d->plane_y
+				* m_speed * dir))] == 0)
 		d->pos_y += d->plane_y * m_speed * dir;
 }
 

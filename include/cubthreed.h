@@ -6,14 +6,12 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 15:30:34 by tmurua            #+#    #+#             */
-/*   Updated: 2025/04/13 18:51:38 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/04/13 21:07:30 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUBTHREED_H
 # define CUBTHREED_H
-# define mapWidth 24
-# define mapHeight 24
 # define SCREENWIDTH 1400
 # define SCREENHEIGHT 700
 # define TEXWIDTH 64
@@ -52,7 +50,6 @@ typedef struct s_image
 
 typedef struct s_data
 {
-	// int			map[mapWidth][mapHeight];
 	int			*map;
 	int			map_rows;
 	int			map_cols;
@@ -111,6 +108,7 @@ void			pivot(t_data *d, int pivot);
 
 // hooks.c
 int				get_map_index(t_data *d, int x, int y);
+int				*convert_parsed_map(t_game *game);
 void			load_parsed_map(t_data *d, t_game *game);
 int				handle_keypress(int keycode, t_data *d);
 int				handle_keyrelease(int keycode, t_data *d);

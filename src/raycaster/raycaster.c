@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 14:04:52 by tsternbe          #+#    #+#             */
-/*   Updated: 2025/04/13 18:49:59 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/04/13 21:08:32 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,4 +119,3 @@ void	digital_differential_analyzer(t_data *d)
 			hit = 1;
 	}
 }
-

@@ -6,79 +6,65 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 13:55:52 by tsternbe          #+#    #+#             */
-/*   Updated: 2025/04/13 18:49:30 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/04/13 21:06:32 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cubthreed.h"
 #include "../../include/cub3D.h"
 
-/*
- *  Computes the 1D array index given 2D coordinates (x, y) using
- *  the number of columns stored in d->map_cols.
- *
- *  Returns: the computed index.
- */
+/*	computes the 1D array index given 2D coordinates (x, y) using number of cols
+	stored in d->map_cols; returns the computed index */
 int	get_map_index(t_data *d, int x, int y)
 {
 	return (x * d->map_cols + y);
 }
 
+/*	converts game->map.lines into a dynamically allocated integer array
+	'1' becomes 1 (wall) and any other valid character becomes 0 (open space)
+	returns pointer to new integer array or NULL on allocation failure */
+int	*convert_parsed_map(t_game *game)
+{
+	int	*new_map;
+	int	row;
+	int	col;
+	int	index;
 
+	new_map = malloc(game->map.rows * game->map.cols * sizeof(int));
+	if (!new_map)
+	{
+		perror("Failed to allocate memory for converted map");
+		return (NULL);
+	}
+	row = 0;
+	while (row < game->map.rows)
+	{
+		col = 0;
+		while (col < game->map.cols)
+		{
+			index = row * game->map.cols + col;
+			if (game->map.lines[row][col] == '1')
+				new_map[index] = 1;
+			else
+				new_map[index] = 0;
+			col++;
+		}
+		row++;
+	}
+	return (new_map);
+}
+
+/*	copies dimensions from parsed map and converts the array of strings
+	into a 1D integer array stored in d->map */
 void	load_parsed_map(t_data *d, t_game *game)
 {
-	(void)game;
-	/* Hardcoded worldMap is defined in row-major order.
-	   Original dimensions: mapWidth rows and mapHeight columns */
-	int	worldMap[mapWidth][mapHeight] = {
-		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,1,1,1,1,1,0,0,0,0,1,0,1,0,1,0,0,0,1},
-		{1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,1,0,0,0,1,0,0,0,1},
-		{1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,1,1,0,1,1,0,0,0,0,1,0,1,0,1,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,1,0,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,1,0,1,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
-	};
-
-	d->map_rows = mapWidth;
-	d->map_cols = mapHeight;
-	d->map = malloc(d->map_rows * d->map_cols * sizeof(int));
+	d->map_rows = game->map.rows;
+	d->map_cols = game->map.cols;
+	d->map = convert_parsed_map(game);
 	if (!d->map)
 	{
-		perror("Failed to allocate memory for map");
+		perror("Error converting parsed map");
 		exit(EXIT_FAILURE);
-	}
-	{
-		int x;
-		int y;
-		x = 0;
-		while (x < mapWidth)
-		{
-			y = 0;
-			while (y < mapHeight)
-			{
-				d->map[get_map_index(d, x, y)] = worldMap[x][y];
-				y++;
-			}
-			x++;
-		}
 	}
 }
 
