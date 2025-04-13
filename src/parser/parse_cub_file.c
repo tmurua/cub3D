@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 13:55:47 by tmurua            #+#    #+#             */
-/*   Updated: 2025/04/01 20:19:28 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/04/13 20:11:14 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ int	parse_cub_file(t_game *game, char *filename)
 		return (print_err("Missing required header(s)"));
 	if (validate_map_requirements(game) == -1)
 		return (-1);
+	game->map.cols = get_max_row_length(game);
+	if (game->map.cols <= 0)
+		return (print_err("Invalid map: no columns found"));
 	return (1);
 }
 
