@@ -4,7 +4,7 @@ WE textures/wolfenstein/red_brick.xpm
 EA textures/wolfenstein/wood.xpm
 
 F 255,0,0
-C 0,0,0
+C 0,0,255
 
 111111
 100S01

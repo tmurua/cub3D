@@ -6,12 +6,12 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 14:24:07 by tsternbe          #+#    #+#             */
-/*   Updated: 2025/04/03 21:19:15 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/04/14 12:37:58 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cubthreed.h"
 #include "../../include/cub3D.h"
+#include "../../include/cubthreed.h"
 
 /* returns timestamp of now from Epoch in microseconds */
 long long	now(void)
@@ -71,6 +71,22 @@ int	destroy(t_data *d)
 		mlx_destroy_display(d->mlx);
 		free(d->mlx);
 	}
+	if (d->map)
+		free(d->map);
+	free_textures(d);
 	exit(0);
 	return (0);
+}
+
+void	free_textures(t_data *d)
+{
+	int	i;
+
+	i = 0;
+	while (1 < 4)
+	{
+		free(d->texture[i]);
+		i++;
+	}
+	free(d->texture);
 }

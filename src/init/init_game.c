@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 15:27:03 by tmurua            #+#    #+#             */
-/*   Updated: 2025/04/13 21:08:10 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/04/14 12:32:49 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	init_game(t_game *game)
 	load_parsed_map(&d, game);
 	textures(&d, game);
 	copy_colors(&d, game);
+	clean_game(game);
 	mlx_hook(d.win, DestroyNotify, StructureNotifyMask, &destroy, &d);
 	mlx_hook(d.win, KeyPress, KeyPressMask, &handle_keypress, &d);
 	mlx_hook(d.win, KeyRelease, KeyReleaseMask, &handle_keyrelease, &d);
