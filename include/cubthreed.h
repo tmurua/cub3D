@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 15:30:34 by tmurua            #+#    #+#             */
-/*   Updated: 2025/04/13 21:35:33 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/04/14 12:03:54 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,6 @@
 # define SCREENHEIGHT 700
 # define TEXWIDTH 64
 # define TEXHEIGHT 64
-# define MINDIST 0.1;
-# define FORWARDS 0;
-# define BACKWARDS 1;
-# define RTRAFE 2;
-# define LSTRAFE 3;
-# define RPIVOT 4;
-# define LPIVOT 5;
-# define NORTH 65280
-# define SOUTH 8388736
-# define EAST 16744448
-# define WEST 16711680
 # include "cub3D.h"
 # include <X11/X.h>
 # include <X11/keysym.h>

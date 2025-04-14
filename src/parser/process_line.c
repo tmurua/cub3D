@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 13:50:53 by tmurua            #+#    #+#             */
-/*   Updated: 2025/04/03 20:18:26 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/04/14 12:06:49 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ int	parse_header_line(char *line, t_game *game)
 		return (handle_texture_hdr(line, &game->texture.we, &game->header.we));
 	else if (ft_strncmp(line, "EA", 2) == 0)
 		return (handle_texture_hdr(line, &game->texture.ea, &game->header.ea));
-	else if (ft_strncmp(line, "F", 1) == 0)
-		return (handle_color_hdr(line, &game->color.floor, &game->header.f));
 	else if (ft_strncmp(line, "C", 1) == 0)
+		return (handle_color_hdr(line, &game->color.floor, &game->header.f));
+	else if (ft_strncmp(line, "F", 1) == 0)
 		return (handle_color_hdr(line, &game->color.ceiling, &game->header.c));
 	else
 		return (print_err("Unknown header identifier"));
