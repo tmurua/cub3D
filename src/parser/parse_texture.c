@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 17:33:15 by tmurua            #+#    #+#             */
-/*   Updated: 2025/04/01 18:49:08 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/04/15 17:19:10 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	parse_texture_line(char *line, char **texture_field)
 {
 	char	*texture_file_path;
 
-	texture_file_path = ft_strtrim(line + 3, " ");
+	texture_file_path = ft_strtrim(line + 3, "@^");
 	if (!texture_file_path)
 		return (print_err("Texture header: allocation failed"));
 	if (check_if_file_exists(texture_file_path) == -1)

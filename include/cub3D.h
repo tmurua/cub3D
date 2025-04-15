@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 13:08:51 by tmurua            #+#    #+#             */
-/*   Updated: 2025/04/03 20:06:29 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/04/15 17:33:36 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 /* buffer for get_next_line */
 # define BUFFER_SIZE 20
 /* set of allowed chars in game->map.lines */
-# define ALLOWED_MAP_CHARS " 01NSEW"
+# define ALLOWED_MAP_CHARS "@01NSEW^"
 
 /* stuctures */
 /* texture file paths for each wall direction */
@@ -111,6 +111,7 @@ int				process_single_file_line(char *line, t_game *game,
 					int *found_non_empty);
 
 /* parser/process_line c */
+char			*replace_spaces(char *line);
 int				check_line_type(char *input_line, t_game *game);
 int				is_header_line(char *line);
 int				parse_header_line(char *line, t_game *game);

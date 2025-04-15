@@ -6,16 +6,38 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 13:50:53 by tmurua            #+#    #+#             */
-/*   Updated: 2025/04/15 12:30:50 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/04/15 17:33:19 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
+char	*replace_spaces(char *line)
+{
+	char	*new_char;
+	int		i;
+
+	new_char = ft_strdup(line);
+	if (!new_char)
+		return (NULL);
+	i = 0;
+	while (new_char[i])
+	{
+		if (new_char[i] == ' ' || new_char[i] == '\r' || new_char[i] == '\t')
+			new_char[i] = '@';
+		if (new_char[i] == '\n')
+			new_char[i] = '^';
+		i++;
+	}
+	return (new_char);
+}
+
 /* delegates line processing to header or map processing depending on its type*/
 int	check_line_type(char *input_line, t_game *game)
 {
 	if (input_line[0] == '\0')
+		return (1);
+	if (input_line[0] == '^')
 		return (1);
 	if (is_header_line(input_line))
 	{
@@ -36,17 +58,17 @@ int	check_line_type(char *input_line, t_game *game)
 /*	returns 1 if line begins with valid header identifier, else 0 */
 int	is_header_line(char *line)
 {
-	if (ft_strncmp(line, "NO ", 3) == 0)
+	if (ft_strncmp(line, "NO@", 3) == 0)
 		return (1);
-	if (ft_strncmp(line, "SO ", 3) == 0)
+	if (ft_strncmp(line, "SO@", 3) == 0)
 		return (1);
-	if (ft_strncmp(line, "WE ", 3) == 0)
+	if (ft_strncmp(line, "WE@", 3) == 0)
 		return (1);
-	if (ft_strncmp(line, "EA ", 3) == 0)
+	if (ft_strncmp(line, "EA@", 3) == 0)
 		return (1);
-	if (ft_strncmp(line, "F ", 2) == 0)
+	if (ft_strncmp(line, "F@", 2) == 0)
 		return (1);
-	if (ft_strncmp(line, "C ", 2) == 0)
+	if (ft_strncmp(line, "C@", 2) == 0)
 		return (1);
 	return (0);
 }

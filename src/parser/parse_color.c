@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 13:39:43 by tmurua            #+#    #+#             */
-/*   Updated: 2025/04/03 20:05:18 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/04/15 17:19:14 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	parse_color_line(char *line, int *color_field)
 	int		green;
 	int		blue;
 
-	color_line = ft_strtrim(line + 2, " ");
+	color_line = ft_strtrim(line + 2, "@^");
 	if (!color_line)
 		return (print_err("Color header: allocation failed"));
 	tokens = ft_split(color_line, ',');

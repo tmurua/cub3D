@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 13:55:47 by tmurua            #+#    #+#             */
-/*   Updated: 2025/04/13 20:11:14 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/04/15 17:33:15 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,21 +93,21 @@ int	handle_lines_loop(int fd, t_game *game, int *found_non_empty)
 	return (1);
 }
 
-/*	trims line, updates flag if line is non‑empty, calls check_line_type() on
-	trim_line, returns processing status or success if no line to be processed*/
+/*	replaces spaces, updates flag if line is non‑empty, calls check_line_type()
+	on line, returns processing status or success if no line to be processed*/
 int	process_single_file_line(char *line, t_game *game, int *found_non_empty)
 {
-	char	*trim_line;
+	char	*processed_line;
 	int		line_processing_status;
 
-	trim_line = ft_strtrim(line, " \n\r\t");
+	processed_line = replace_spaces(line);
 	free(line);
-	if (trim_line)
+	if (processed_line)
 	{
-		if (trim_line[0] != '\0')
+		if (processed_line[0] != '\0')
 			*found_non_empty = 1;
-		line_processing_status = check_line_type(trim_line, game);
-		free(trim_line);
+		line_processing_status = check_line_type(processed_line, game);
+		free(processed_line);
 		return (line_processing_status);
 	}
 	return (1);
