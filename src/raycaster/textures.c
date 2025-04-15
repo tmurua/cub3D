@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 14:14:50 by tsternbe          #+#    #+#             */
-/*   Updated: 2025/04/03 17:53:10 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/04/15 14:41:55 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	free_texture(int **texture, int y)
 		free(texture[i]);
 		i++;
 	}
+	free(texture);
 }
 
 int	**allocate_texture(int width, int height)

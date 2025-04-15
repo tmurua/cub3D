@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 14:24:07 by tsternbe          #+#    #+#             */
-/*   Updated: 2025/04/14 12:37:58 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/04/15 14:41:36 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,20 +73,6 @@ int	destroy(t_data *d)
 	}
 	if (d->map)
 		free(d->map);
-	free_textures(d);
 	exit(0);
 	return (0);
-}
-
-void	free_textures(t_data *d)
-{
-	int	i;
-
-	i = 0;
-	while (1 < 4)
-	{
-		free(d->texture[i]);
-		i++;
-	}
-	free(d->texture);
 }

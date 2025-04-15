@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 15:30:34 by tmurua            #+#    #+#             */
-/*   Updated: 2025/04/14 12:38:27 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/04/15 14:42:35 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ typedef struct s_data
 long long		now(void);
 int				initialize_img(t_data *d);
 int				destroy(t_data *d);
-void			free_textures(t_data *d);
 
 // movement.c
 int				handle_input(t_data *d);
