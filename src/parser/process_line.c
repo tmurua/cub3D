@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 13:50:53 by tmurua            #+#    #+#             */
-/*   Updated: 2025/04/14 12:06:49 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/04/15 12:30:50 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,13 @@ int	is_header_line(char *line)
 /* parses a header line and delegates processing to texture or color handlers */
 int	parse_header_line(char *line, t_game *game)
 {
-	if (ft_strncmp(line, "NO", 2) == 0)
+	if (ft_strncmp(line, "EA", 2) == 0)
 		return (handle_texture_hdr(line, &game->texture.no, &game->header.no));
-	else if (ft_strncmp(line, "SO", 2) == 0)
-		return (handle_texture_hdr(line, &game->texture.so, &game->header.so));
 	else if (ft_strncmp(line, "WE", 2) == 0)
+		return (handle_texture_hdr(line, &game->texture.so, &game->header.so));
+	else if (ft_strncmp(line, "SO", 2) == 0)
 		return (handle_texture_hdr(line, &game->texture.we, &game->header.we));
-	else if (ft_strncmp(line, "EA", 2) == 0)
+	else if (ft_strncmp(line, "NO", 2) == 0)
 		return (handle_texture_hdr(line, &game->texture.ea, &game->header.ea));
 	else if (ft_strncmp(line, "C", 1) == 0)
 		return (handle_color_hdr(line, &game->color.floor, &game->header.f));
