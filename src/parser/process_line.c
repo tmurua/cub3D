@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 13:50:53 by tmurua            #+#    #+#             */
-/*   Updated: 2025/04/15 17:33:19 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/04/16 19:28:17 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*replace_spaces(char *line)
 	i = 0;
 	while (new_char[i])
 	{
-		if (new_char[i] == ' ' || new_char[i] == '\r' || new_char[i] == '\t')
+		if (new_char[i] == ' ')
 			new_char[i] = '@';
 		if (new_char[i] == '\n')
 			new_char[i] = '^';

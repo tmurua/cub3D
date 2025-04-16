@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 13:55:47 by tmurua            #+#    #+#             */
-/*   Updated: 2025/04/15 17:33:15 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/04/16 19:54:45 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,11 @@ int	process_single_file_line(char *line, t_game *game, int *found_non_empty)
 	char	*processed_line;
 	int		line_processing_status;
 
+	if (contains_reserved_chars(line))
+	{
+		free(line);
+		return (print_err("Error: invalid characters found in cub file"));
+	}
 	processed_line = replace_spaces(line);
 	free(line);
 	if (processed_line)

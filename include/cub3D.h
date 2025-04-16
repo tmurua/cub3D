@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 13:08:51 by tmurua            #+#    #+#             */
-/*   Updated: 2025/04/15 17:33:36 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/04/16 19:53:05 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,8 @@ int				input_validation(int argc, char **argv, t_game *game);
 
 /* error/error_utils.c */
 int				print_err(char *str_err);
-void			malloc_error(void);
 int				free_and_return(char *ptr, int ret);
+int				contains_reserved_chars(char *line);
 
 /* parser/parse_cub_file.c */
 int				parse_cub_file(t_game *game, char *filename);

@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 07:04:20 by tmurua            #+#    #+#             */
-/*   Updated: 2025/04/03 15:36:41 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/04/16 19:53:20 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,22 @@ int	print_err(char *str_err)
 	return (-1);
 }
 
-void	malloc_error(void)
-{
-	perror("malloc");
-	exit(EXIT_FAILURE);
-}
-
 int	free_and_return(char *ptr, int ret)
 {
 	free(ptr);
 	return (ret);
+}
+
+int	contains_reserved_chars(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == '@' || line[i] == '^')
+			return (1);
+		i++;
+	}
+	return (0);
 }
