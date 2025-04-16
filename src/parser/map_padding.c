@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 15:08:12 by tmurua            #+#    #+#             */
-/*   Updated: 2025/04/02 15:57:18 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/04/16 18:35:54 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ char	*pad_row(char *row, int max_row_length)
 }
 
 /*	fills padded_row with the contents of trimmed_row up to its length,
-	and pads the rest with wall chars ('1') until reaching max_row_length */
+	and pads the rest with wall chars ('^') until reaching max_row_length */
 void	fill_padded_row(char *padded_row, char *trimmed_row, int max_row_length)
 {
 	int	trimmed_row_length;
@@ -103,7 +103,7 @@ void	fill_padded_row(char *padded_row, char *trimmed_row, int max_row_length)
 		if (current_char_pos < trimmed_row_length)
 			padded_row[current_char_pos] = trimmed_row[current_char_pos];
 		else
-			padded_row[current_char_pos] = '1';
+			padded_row[current_char_pos] = '^';
 		current_char_pos++;
 	}
 }
