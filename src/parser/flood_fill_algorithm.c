@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 15:03:51 by tmurua            #+#    #+#             */
-/*   Updated: 2025/04/02 16:24:26 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/04/22 13:12:01 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	perform_flood_fill(t_game *game)
 			&start);
 	free_map_lines_copy(map_lines_copy, game->map.rows);
 	if (result == -1)
-		return (print_err("Map is not enclosed by walls"));
+		return (print_err("Map is not enclosed by walls or has spaces in it"));
 	return (1);
 }
 
@@ -55,7 +55,7 @@ int	flood_fill(t_game *game, int x, int y)
 {
 	if (x < 0 || x >= game->map.rows || y < 0 || y >= game->map.cols)
 		return (-1);
-	if (game->map.lines[x][y] == ' ')
+	if (game->map.lines[x][y] == '@' || game->map.lines[x][y] == '^')
 		return (-1);
 	if (game->map.lines[x][y] == '1' || game->map.lines[x][y] == 'V')
 		return (0);
