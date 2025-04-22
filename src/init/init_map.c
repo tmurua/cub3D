@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 21:21:06 by tmurua            #+#    #+#             */
-/*   Updated: 2025/04/22 14:02:17 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/04/22 14:15:27 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ void	load_parsed_map(t_data *d, t_game *game)
 	}
 }
 
-/*	build a padded **char map, alloc a new int map, fill it, clean, return it
-	fill it, clean up, and return it (or NULL on error) */
+/*	build a padded **char map, alloc a new int map, fill it, clean, return it */
 int	*convert_parsed_map(t_game *game, int *map_cols)
 {
 	char	**padded_map_lines;

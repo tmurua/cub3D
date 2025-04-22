@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 13:08:51 by tmurua            #+#    #+#             */
-/*   Updated: 2025/04/16 19:53:05 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/04/22 14:30:01 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,7 @@ int				flood_fill(t_game *game, int r, int c);
 /* parser/map_padding.c */
 char			**copy_padded_map_lines(t_game *game, int *total_cols);
 int				get_max_row_length(t_game *game);
-char			*pad_row(char *row, int max_row_length);
+char			*pad_row(char *current_row, int max_row_length);
 void			fill_padded_row(char *padded, char *trim, int max_row_length);
 void			free_map_lines_copy(char **map_lines_copy, int map_rows);
 

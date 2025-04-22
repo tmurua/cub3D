@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 14:24:07 by tsternbe          #+#    #+#             */
-/*   Updated: 2025/04/15 14:41:36 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/04/22 14:25:50 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	initialize_img(t_data *d)
 		perror("Failed to initialize mlx");
 		return (1);
 	}
-	d->win = mlx_new_window(d->mlx, SCREENWIDTH, SCREENHEIGHT, "raycaster");
+	d->win = mlx_new_window(d->mlx, SCREENWIDTH, SCREENHEIGHT, "cub3D");
 	if (d->win == NULL)
 	{
 		free(d->win);
