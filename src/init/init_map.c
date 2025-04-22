@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 21:21:06 by tmurua            #+#    #+#             */
-/*   Updated: 2025/04/13 21:27:03 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/04/22 14:02:17 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@
 void	load_parsed_map(t_data *d, t_game *game)
 {
 	d->map_rows = game->map.rows;
-	d->map_cols = game->map.cols;
-	d->map = convert_parsed_map(game);
+	d->map = convert_parsed_map(game, &d->map_cols);
 	if (!d->map)
 	{
 		perror("Error converting parsed map");
@@ -27,35 +26,49 @@ void	load_parsed_map(t_data *d, t_game *game)
 	}
 }
 
-/*	converts game->map.lines into an integer array
-	'1' becomes 1 (wall) and any other valid character becomes 0 (open space)
-	returns pointer to new integer array or NULL on allocation failure */
-int	*convert_parsed_map(t_game *game)
+/*	build a padded **char map, alloc a new int map, fill it, clean, return it
+	fill it, clean up, and return it (or NULL on error) */
+int	*convert_parsed_map(t_game *game, int *map_cols)
 {
-	int	*new_map;
-	int	row;
-	int	col;
-	int	index;
+	char	**padded_map_lines;
+	int		*integer_map;
+	int		map_rows;
 
-	new_map = malloc(game->map.rows * game->map.cols * sizeof(int));
-	if (!new_map)
+	map_rows = game->map.rows;
+	padded_map_lines = copy_padded_map_lines(game, map_cols);
+	if (!padded_map_lines)
+		return (NULL);
+	integer_map = malloc(map_rows * *map_cols * sizeof(int));
+	if (!integer_map)
 	{
-		perror("Failed to allocate memory for converted map");
+		perror("Failed to allocate converted map");
+		free_map_lines_copy(padded_map_lines, map_rows);
 		return (NULL);
 	}
-	row = 0;
-	while (row < game->map.rows)
+	fill_converted_map(integer_map, padded_map_lines, map_rows, *map_cols);
+	free_map_lines_copy(padded_map_lines, map_rows);
+	return (integer_map);
+}
+
+/* walk the padded char‐map and write into the int‐map */
+void	fill_converted_map(int *map, char **lines, int rows, int cols)
+{
+	int	current_row;
+	int	current_col;
+	int	index;
+
+	current_row = 0;
+	while (current_row < rows)
 	{
-		col = 0;
-		while (col < game->map.cols)
+		current_col = 0;
+		while (current_col < cols)
 		{
-			index = row * game->map.cols + col;
-			new_map[index] = convert_map_cell(game->map.lines[row][col]);
-			col++;
+			index = current_row * cols + current_col;
+			map[index] = convert_map_cell(lines[current_row][current_col]);
+			current_col++;
 		}
-		row++;
+		current_row++;
 	}
-	return (new_map);
 }
 
 /*	converts a single char from parsed map into an integer.

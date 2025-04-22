@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 15:30:34 by tmurua            #+#    #+#             */
-/*   Updated: 2025/04/15 14:42:35 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/04/22 13:39:58 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,8 @@ void			set_west(t_data *d);
 
 /* init/init_map.c */
 void			load_parsed_map(t_data *d, t_game *game);
-int				*convert_parsed_map(t_game *game);
+int				*convert_parsed_map(t_game *game, int *map_cols);
+void			fill_converted_map(int *map, char **padded, int rows, int cols);
 int				convert_map_cell(char c);
 int				get_map_index(t_data *d, int x, int y);
 

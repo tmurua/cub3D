@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 15:08:12 by tmurua            #+#    #+#             */
-/*   Updated: 2025/04/16 18:35:54 by tmurua           ###   ########.fr       */
+/*   Updated: 2025/04/22 14:05:20 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /*	creates a rectangular copy of game->map.lines by first computing the maximum
 	trimmed row length, then creating a padded copy of each row with pad_row()
-	with wall characters ('1') if necessary;
+	with wall characters ('^') if necessary;
 	returns the new array and sets *total_cols to the max_row_length */
 char	**copy_padded_map_lines(t_game *game, int *total_cols)
 {
@@ -69,7 +69,7 @@ int	get_max_row_length(t_game *game)
 }
 
 /*	creates new row for each map line by trimming it and then padding it
-	with wall chars ('1') to reach the specified max_row_length */
+	with wall chars ('^') to reach the specified max_row_length */
 char	*pad_row(char *row, int max_row_length)
 {
 	char	*trimmed_row;
